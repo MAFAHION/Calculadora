@@ -40,29 +40,26 @@ async function startServer() {
       `);
       stmt.run(name, email, phone, businessType, city, instagram, facebook, website, password);
 
-      // Webhook integration - explicitly sending all fields
-      try {
-        await fetch("https://n8n.mafashionllc.com/webhook/595df768-d246-4dc4-b481-9e80e6154d7d", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            name,
-            email,
-            phone,
-            businessType,
-            city,
-            instagram,
-            facebook,
-            website,
-            password,
-            timestamp: new Date().toISOString()
-          }),
-        });
-      } catch (webhookError) {
-        console.error("Webhook failed:", webhookError);
-      }
+      // Webhook integration - explicitly sending all fields (Non-blocking)
+      fetch("https://n8n.mafashionllc.com/webhook/595df768-d246-4dc4-b481-9e80e6154d7d", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name,
+          email,
+          phone,
+          businessType,
+          city,
+          instagram,
+          facebook,
+          website,
+          password,
+          timestamp: new Date().toISOString()
+        }),
+      }).catch(err => console.error("Webhook background failed:", err));
 
-      res.status(201).json({ message: "User registered successfully" });
+      const newUser = db.prepare("SELECT id, name, phone FROM users WHERE phone = ?").get(phone);
+      res.status(201).json({ message: "User registered successfully", user: newUser });
     } catch (error: any) {
       if (error.code === 'SQLITE_CONSTRAINT') {
         res.status(400).json({ error: "Phone number already registered" });

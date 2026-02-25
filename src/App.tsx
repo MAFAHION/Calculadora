@@ -41,6 +41,7 @@ export default function App() {
   const [adminUsers, setAdminUsers] = useState<any[]>([]);
   const [adminPass, setAdminPass] = useState('');
   const [isAdminAuthenticated, setIsAdminAuthenticated] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const [selectedUsers, setSelectedUsers] = useState<number[]>([]);
 
@@ -139,22 +140,29 @@ export default function App() {
   // Auth Handlers
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
+    setIsLoading(true);
     const formData = new FormData(e.target as HTMLFormElement);
     const phone = formData.get('phone');
     const password = formData.get('password');
 
-    const res = await fetch('/api/login', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ phone, password })
-    });
+    try {
+      const res = await fetch('/api/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ phone, password })
+      });
 
-    if (res.ok) {
-      const data = await res.json();
-      setUser(data.user);
-      setView('calculator');
-    } else {
-      alert(t.invalidCredentials);
+      if (res.ok) {
+        const data = await res.json();
+        setUser(data.user);
+        setView('calculator');
+      } else {
+        alert(t.invalidCredentials);
+      }
+    } catch (err) {
+      alert("Error de conexión");
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -175,32 +183,56 @@ export default function App() {
     if (password !== confirm) return alert(t.passwordsDontMatch);
     if (password.length < 6) return alert(t.minPassword);
 
+    setIsLoading(true);
     const fullData = { ...regData, password };
-    const res = await fetch('/api/register', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(fullData)
-    });
+    
+    try {
+      const res = await fetch('/api/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(fullData)
+      });
 
-    if (res.ok) {
-      alert(t.registrationSuccess);
-      setView('login');
-    } else {
-      const err = await res.json();
-      alert(err.error || 'Error');
+      if (res.ok) {
+        const data = await res.json();
+        alert(t.registrationSuccess);
+        if (data.user) {
+          setUser(data.user);
+          setView('calculator');
+        } else {
+          setView('login');
+        }
+      } else {
+        const err = await res.json();
+        alert(err.error || 'Error');
+      }
+    } catch (err) {
+      alert("Error al registrar");
+    } finally {
+      setIsLoading(false);
     }
   };
 
   // Admin Handlers
-  const fetchAdminUsers = async () => {
-    const res = await fetch(`/api/admin/users?password=${adminPass.trim()}`);
-    if (res.ok) {
-      const data = await res.json();
-      setAdminUsers(data);
-      setSelectedUsers([]);
-      setIsAdminAuthenticated(true);
-    } else {
-      alert(t.adminIncorrectPass);
+  const fetchAdminUsers = async (e?: React.FormEvent) => {
+    if (e) e.preventDefault();
+    if (!adminPass.trim()) return;
+    
+    setIsLoading(true);
+    try {
+      const res = await fetch(`/api/admin/users?password=${encodeURIComponent(adminPass.trim())}`);
+      if (res.ok) {
+        const data = await res.json();
+        setAdminUsers(data);
+        setSelectedUsers([]);
+        setIsAdminAuthenticated(true);
+      } else {
+        alert(t.adminIncorrectPass);
+      }
+    } catch (err) {
+      alert("Error de conexión con el servidor");
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -296,7 +328,9 @@ export default function App() {
                     <label className="text-[10px] font-bold text-cyber-cyan uppercase tracking-widest">{t.password}</label>
                     <Input name="password" type="password" required placeholder="••••••" />
                   </div>
-                  <Button type="submit">{t.login}</Button>
+                  <Button type="submit" disabled={isLoading}>
+                    {isLoading ? "..." : t.login}
+                  </Button>
                 </form>
               </Card>
               <div className="text-center">
@@ -360,7 +394,9 @@ export default function App() {
                 <form onSubmit={handleRegister2} className="space-y-4">
                   <Input name="password" type="password" placeholder={t.password} required minLength={6} />
                   <Input name="confirmPassword" type="password" placeholder={t.confirmPassword} required minLength={6} />
-                  <Button type="submit">{t.createAccount}</Button>
+                  <Button type="submit" disabled={isLoading}>
+                    {isLoading ? "..." : t.createAccount}
+                  </Button>
                 </form>
               </Card>
             </motion.div>
@@ -644,14 +680,18 @@ export default function App() {
 
               {!isAdminAuthenticated ? (
                 <Card className="space-y-4 futuristic-glow">
-                  <Input 
-                    type="password" 
-                    placeholder={t.adminPassword} 
-                    value={adminPass} 
-                    onChange={e => setAdminPass(e.target.value)} 
-                    onKeyDown={e => e.key === 'Enter' && fetchAdminUsers()}
-                  />
-                  <Button onClick={fetchAdminUsers}>{t.login}</Button>
+                  <form onSubmit={fetchAdminUsers} className="space-y-4">
+                    <Input 
+                      type="password" 
+                      placeholder={t.adminPassword} 
+                      value={adminPass} 
+                      onChange={e => setAdminPass(e.target.value)} 
+                      required
+                    />
+                    <Button type="submit" disabled={isLoading}>
+                      {isLoading ? "..." : t.login}
+                    </Button>
+                  </form>
                 </Card>
               ) : (
                 <div className="space-y-4">
