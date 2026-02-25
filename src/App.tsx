@@ -7,10 +7,9 @@ import {
   translations, type Language 
 } from './translations';
 import { 
-  ArrowLeft, Plus, Trash2, LogOut, MessageCircle, Globe, Download, User as UserIcon, Shield
+  Plus, Trash2, LogOut, MessageCircle, Globe
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
-import * as XLSX from 'xlsx';
 
 type View = 'form' | 'calculator';
 
@@ -40,8 +39,6 @@ export default function App() {
   const [isLoading, setIsLoading] = useState(false);
 
   const t = translations[lang];
-
-  const isConfigured = true; // No longer needs Supabase config
 
   // WhatsApp Link
   const whatsappMessage = encodeURIComponent("¡Hola! 👋 Vengo de la Calculadora MA Fashion LLC y me gustaría realizar una consulta. 🚀✨");
@@ -134,34 +131,27 @@ export default function App() {
   }, [watchedValues]);
 
   // Form Handlers
-  const handleFormSubmit = async (e: React.FormEvent) => {
+  const handleFormSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setIsLoading(true);
     const formData = new FormData(e.target as HTMLFormElement);
     const data = Object.fromEntries(formData.entries());
     
-    try {
-      // Webhook integration - explicitly sending all fields
-      await fetch("https://n8n.mafashionllc.com/webhook/595df768-d246-4dc4-b481-9e80e6154d7d", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ 
-          ...data, 
-          timestamp: new Date().toISOString(),
-          source: 'MA Fashion Calculator'
-        }),
-      });
+    // Immediate transition for better UX
+    setUser(data);
+    setView('calculator');
 
-      setUser(data);
-      setView('calculator');
-    } catch (err) {
-      // Even if webhook fails, we let them use the calculator to avoid blocking
-      console.error("Webhook failed:", err);
-      setUser(data);
-      setView('calculator');
-    } finally {
-      setIsLoading(false);
-    }
+    // Webhook integration - non-blocking background call
+    fetch("https://n8n.mafashionllc.com/webhook/595df768-d246-4dc4-b481-9e80e6154d7d", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ 
+        ...data, 
+        timestamp: new Date().toISOString(),
+        source: 'MA Fashion Calculator'
+      }),
+    }).catch(err => {
+      console.error("Webhook background failed:", err);
+    });
   };
 
   const logout = () => {
@@ -509,126 +499,6 @@ export default function App() {
             </motion.div>
           )}
 
-          {view === 'admin' && (
-            <motion.div 
-              key="admin"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              className="space-y-6"
-            >
-              <div className="flex items-center gap-4">
-                <button onClick={() => setView('login')} className="p-2 hover:bg-white/10 rounded-full transition-colors">
-                  <ArrowLeft size={20} className="text-cyber-cyan" />
-                </button>
-                <h2 className="text-xl font-bold uppercase tracking-widest">{t.admin}</h2>
-              </div>
-
-              {!isAdminAuthenticated ? (
-                <Card className="space-y-4 futuristic-glow">
-                  <form onSubmit={fetchAdminUsers} className="space-y-4">
-                    <Input 
-                      type="password" 
-                      placeholder={t.adminPassword} 
-                      value={adminPass} 
-                      onChange={e => setAdminPass(e.target.value)} 
-                      required
-                    />
-                    <Button type="submit" disabled={isLoading}>
-                      {isLoading ? "..." : t.login}
-                    </Button>
-                  </form>
-                </Card>
-              ) : (
-                <div className="space-y-4">
-                  <div className="flex flex-wrap gap-2">
-                    <Button onClick={downloadExcel} variant="secondary" className="flex-1 flex items-center justify-center gap-2 text-xs py-3">
-                      <Download size={16} /> {t.downloadExcel}
-                    </Button>
-                    {selectedUsers.length > 0 && (
-                      <Button 
-                        onClick={deleteSelectedUsers} 
-                        className="flex-1 bg-red-500/20 text-red-500 border border-red-500/50 hover:bg-red-500 hover:text-white flex items-center justify-center gap-2 text-xs py-3 relative z-30"
-                      >
-                        <Trash2 size={16} /> {t.delete} ({selectedUsers.length})
-                      </Button>
-                    )}
-                  </div>
-
-                  <div className="flex items-center gap-2 px-2">
-                    <input 
-                      type="checkbox" 
-                      checked={selectedUsers.length === adminUsers.length && adminUsers.length > 0}
-                      onChange={toggleSelectAll}
-                      className="w-4 h-4 rounded border-white/20 bg-white/5 text-cyber-cyan focus:ring-cyber-cyan cursor-pointer"
-                    />
-                    <span className="text-[10px] font-bold uppercase tracking-widest text-white/30">{t.selectAll}</span>
-                  </div>
-
-                  <div className="overflow-x-auto -mx-6 px-6">
-                    <div className="min-w-[800px] space-y-2">
-                      {/* Header Row */}
-                      <div className="grid grid-cols-[40px_1.5fr_1fr_1fr_1fr_1fr_60px] gap-4 px-4 py-2 text-[10px] font-bold uppercase tracking-widest text-white/30 border-b border-white/5">
-                        <div></div>
-                        <div>{t.name} / {t.email}</div>
-                        <div>{t.phone} / {t.password}</div>
-                        <div>{t.city} / {t.businessType}</div>
-                        <div>{t.socialMedia}</div>
-                        <div>{t.registrationDate}</div>
-                        <div></div>
-                      </div>
-
-                      {adminUsers.map(u => (
-                        <div 
-                          key={u.id} 
-                          className={cn(
-                            "grid grid-cols-[40px_1.5fr_1fr_1fr_1fr_1fr_60px] gap-4 px-4 py-3 items-center transition-all border border-white/5 rounded-lg text-[11px]",
-                            selectedUsers.includes(u.id) ? "border-cyber-cyan/50 bg-cyber-cyan/5" : "bg-white/5 hover:bg-white/10"
-                          )}
-                        >
-                          <div className="flex justify-center">
-                            <input 
-                              type="checkbox" 
-                              checked={selectedUsers.includes(u.id)}
-                              onChange={() => toggleUserSelection(u.id)}
-                              className="w-4 h-4 rounded border-white/20 bg-white/5 text-cyber-cyan focus:ring-cyber-cyan cursor-pointer"
-                            />
-                          </div>
-                          <div className="truncate">
-                            <p className="font-bold text-white truncate">{u.name}</p>
-                            <p className="text-white/40 truncate">{u.email}</p>
-                          </div>
-                          <div>
-                            <p className="text-cyber-cyan font-mono">{u.phone}</p>
-                            <p className="text-cyber-pink font-mono">🔑 {u.password}</p>
-                          </div>
-                          <div className="truncate">
-                            <p className="text-white truncate">📍 {u.city || '-'}</p>
-                            <p className="text-white/60 truncate">💼 {u.business_type || '-'}</p>
-                          </div>
-                          <div className="space-y-0.5">
-                            {u.instagram && <p className="text-cyber-cyan truncate">IG: {u.instagram}</p>}
-                            {u.facebook && <p className="text-cyber-cyan truncate">FB: {u.facebook}</p>}
-                            {u.website && <p className="text-cyber-cyan truncate">🌐 {u.website}</p>}
-                          </div>
-                          <div className="text-white/30 text-[9px]">
-                            {new Date(u.created_at).toLocaleDateString()}
-                          </div>
-                          <div className="flex justify-end">
-                            <button 
-                              onClick={(e) => { e.stopPropagation(); deleteUser(u.id); }} 
-                              className="text-white/20 hover:text-red-500 p-2 transition-colors relative z-30 cursor-pointer"
-                            >
-                              <Trash2 size={16} />
-                            </button>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              )}
-            </motion.div>
-          )}
         </AnimatePresence>
 
         <footer className="mt-12 text-center">
@@ -647,15 +517,6 @@ export default function App() {
       >
         <MessageCircle size={28} fill="currentColor" />
       </a>
-
-      {/* Hidden Admin Trigger */}
-      <button 
-        onClick={() => setView('admin')}
-        title="Administración"
-        className="fixed bottom-6 left-6 w-10 h-10 text-white/20 hover:text-cyber-cyan transition-all flex items-center justify-center z-50 cursor-pointer hover:scale-110 active:scale-95"
-      >
-        <Shield size={22} />
-      </button>
     </div>
   );
 }
