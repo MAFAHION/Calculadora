@@ -12,7 +12,7 @@ import {
 import { motion, AnimatePresence } from 'motion/react';
 import * as XLSX from 'xlsx';
 
-type View = 'login' | 'register-1' | 'register-2' | 'calculator' | 'admin';
+type View = 'form' | 'calculator';
 
 interface Product {
   name: string;
@@ -34,18 +34,14 @@ interface CalculatorForm {
 }
 
 export default function App() {
-  const [view, setView] = useState<View>('login');
+  const [view, setView] = useState<View>('form');
   const [lang, setLang] = useState<Language>('es');
   const [user, setUser] = useState<any>(null);
-  const [regData, setRegData] = useState<any>({});
-  const [adminUsers, setAdminUsers] = useState<any[]>([]);
-  const [adminPass, setAdminPass] = useState('');
-  const [isAdminAuthenticated, setIsAdminAuthenticated] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
-  const [selectedUsers, setSelectedUsers] = useState<number[]>([]);
-
   const t = translations[lang];
+
+  const isConfigured = true; // No longer needs Supabase config
 
   // WhatsApp Link
   const whatsappMessage = encodeURIComponent("¡Hola! 👋 Vengo de la Calculadora MA Fashion LLC y me gustaría realizar una consulta. 🚀✨");
@@ -137,145 +133,40 @@ export default function App() {
     };
   }, [watchedValues]);
 
-  // Auth Handlers
-  const handleLogin = async (e: React.FormEvent) => {
+  // Form Handlers
+  const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
-    const formData = new FormData(e.target as HTMLFormElement);
-    const phone = formData.get('phone');
-    const password = formData.get('password');
-
-    try {
-      const res = await fetch('/api/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ phone, password })
-      });
-
-      if (res.ok) {
-        const data = await res.json();
-        setUser(data.user);
-        setView('calculator');
-      } else {
-        alert(t.invalidCredentials);
-      }
-    } catch (err) {
-      alert("Error de conexión");
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  const handleRegister1 = (e: React.FormEvent) => {
-    e.preventDefault();
     const formData = new FormData(e.target as HTMLFormElement);
     const data = Object.fromEntries(formData.entries());
-    setRegData(data);
-    setView('register-2');
-  };
-
-  const handleRegister2 = async (e: React.FormEvent) => {
-    e.preventDefault();
-    const formData = new FormData(e.target as HTMLFormElement);
-    const password = formData.get('password') as string;
-    const confirm = formData.get('confirmPassword') as string;
-
-    if (password !== confirm) return alert(t.passwordsDontMatch);
-    if (password.length < 6) return alert(t.minPassword);
-
-    setIsLoading(true);
-    const fullData = { ...regData, password };
     
     try {
-      const res = await fetch('/api/register', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(fullData)
+      // Webhook integration - explicitly sending all fields
+      await fetch("https://n8n.mafashionllc.com/webhook/595df768-d246-4dc4-b481-9e80e6154d7d", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ 
+          ...data, 
+          timestamp: new Date().toISOString(),
+          source: 'MA Fashion Calculator'
+        }),
       });
 
-      if (res.ok) {
-        const data = await res.json();
-        alert(t.registrationSuccess);
-        if (data.user) {
-          setUser(data.user);
-          setView('calculator');
-        } else {
-          setView('login');
-        }
-      } else {
-        const err = await res.json();
-        alert(err.error || 'Error');
-      }
+      setUser(data);
+      setView('calculator');
     } catch (err) {
-      alert("Error al registrar");
+      // Even if webhook fails, we let them use the calculator to avoid blocking
+      console.error("Webhook failed:", err);
+      setUser(data);
+      setView('calculator');
     } finally {
       setIsLoading(false);
     }
   };
 
-  // Admin Handlers
-  const fetchAdminUsers = async (e?: React.FormEvent) => {
-    if (e) e.preventDefault();
-    if (!adminPass.trim()) return;
-    
-    setIsLoading(true);
-    try {
-      const res = await fetch(`/api/admin/users?password=${encodeURIComponent(adminPass.trim())}`);
-      if (res.ok) {
-        const data = await res.json();
-        setAdminUsers(data);
-        setSelectedUsers([]);
-        setIsAdminAuthenticated(true);
-      } else {
-        alert(t.adminIncorrectPass);
-      }
-    } catch (err) {
-      alert("Error de conexión con el servidor");
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  const deleteUser = async (id: number) => {
-    if (!confirm(t.deleteUserConfirm)) return;
-    const res = await fetch(`/api/admin/users/${id}`, {
-      method: 'DELETE',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ password: adminPass })
-    });
-    if (res.ok) fetchAdminUsers();
-  };
-
-  const deleteSelectedUsers = async () => {
-    if (!selectedUsers.length) return;
-    if (!confirm(t.deleteSelectedConfirm)) return;
-    const res = await fetch('/api/admin/users', {
-      method: 'DELETE',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ password: adminPass, ids: selectedUsers })
-    });
-    if (res.ok) fetchAdminUsers();
-  };
-
-  const toggleUserSelection = (id: number) => {
-    setSelectedUsers(prev => 
-      prev.includes(id) ? prev.filter(i => i !== id) : [...prev, id]
-    );
-  };
-
-  const toggleSelectAll = () => {
-    if (selectedUsers.length === adminUsers.length) {
-      setSelectedUsers([]);
-    } else {
-      setSelectedUsers(adminUsers.map(u => u.id));
-    }
-  };
-
-  const downloadExcel = () => {
-    const ws = XLSX.utils.json_to_sheet(adminUsers);
-    const wb = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(wb, ws, "Users");
-    XLSX.writeFile(wb, "S_PROFESSIONAL_Users.xlsx");
+  const logout = () => {
+    setUser(null);
+    setView('form');
   };
 
   // Phone filter
@@ -306,112 +197,66 @@ export default function App() {
 
       <main className="p-6 pt-12 relative">
         <AnimatePresence mode="wait">
-          {view === 'login' && (
+          {view === 'form' && (
             <motion.div 
-              key="login"
+              key="form"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
               className="space-y-8"
             >
               <div className="text-center space-y-2">
-                <Logo className="justify-center" />
-                <p className="text-brand-muted text-sm uppercase tracking-[0.3em] font-light">{t.login}</p>
+                <Logo className="mx-auto w-48 h-auto" />
+                <p className="text-[10px] text-white/40 uppercase tracking-[0.3em] font-medium">
+                  {t.calculator}
+                </p>
               </div>
+
               <Card className="futuristic-glow">
-                <form onSubmit={handleLogin} className="space-y-4">
+                <form onSubmit={handleFormSubmit} className="space-y-4">
+                  <div className="space-y-1">
+                    <label className="text-[10px] font-bold text-cyber-cyan uppercase tracking-widest">{t.name}</label>
+                    <Input name="name" placeholder="Ej: Maria Lopez" required />
+                  </div>
+                  <div className="space-y-1">
+                    <label className="text-[10px] font-bold text-cyber-cyan uppercase tracking-widest">{t.email}</label>
+                    <Input name="email" type="email" placeholder="maria@ejemplo.com" required />
+                  </div>
                   <div className="space-y-1">
                     <label className="text-[10px] font-bold text-cyber-cyan uppercase tracking-widest">{t.phone}</label>
-                    <Input name="phone" type="tel" onInput={onPhoneInput} required placeholder="1234567890" />
+                    <Input name="phone" type="tel" onInput={onPhoneInput} placeholder="1234567890" required minLength={10} />
                   </div>
                   <div className="space-y-1">
-                    <label className="text-[10px] font-bold text-cyber-cyan uppercase tracking-widest">{t.password}</label>
-                    <Input name="password" type="password" required placeholder="••••••" />
+                    <label className="text-[10px] font-bold text-cyber-cyan uppercase tracking-widest">{t.businessType}</label>
+                    <Input name="businessType" placeholder="Ej: Spa, Estética" />
                   </div>
-                  <Button type="submit" disabled={isLoading}>
-                    {isLoading ? "..." : t.login}
-                  </Button>
-                </form>
-              </Card>
-              <div className="text-center">
-                <button onClick={() => setView('register-1')} className="text-xs font-bold text-white/30 hover:text-cyber-cyan transition-colors uppercase tracking-widest">
-                  {t.register}
-                </button>
-              </div>
-            </motion.div>
-          )}
-
-          {view === 'register-1' && (
-            <motion.div 
-              key="reg1"
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -20 }}
-              className="space-y-6"
-            >
-              <div className="flex items-center gap-4">
-                <button onClick={() => setView('login')} className="p-2 hover:bg-white/10 rounded-full transition-colors">
-                  <ArrowLeft size={20} className="text-cyber-cyan" />
-                </button>
-                <h2 className="text-xl font-bold uppercase tracking-widest">{t.register}</h2>
-              </div>
-              <Card className="futuristic-glow">
-                <form onSubmit={handleRegister1} className="space-y-4">
-                  <Input name="name" placeholder={t.name} required />
-                  <Input name="email" type="email" placeholder={t.email} required />
-                  <Input name="phone" type="tel" onInput={onPhoneInput} placeholder={t.phone} required minLength={10} />
-                  <Input name="businessType" placeholder={t.businessType} />
-                  <Input name="city" placeholder={t.city} />
-                  <Input name="instagram" placeholder={t.instagram} />
-                  <Input name="facebook" placeholder={t.facebook} />
-                  <Input name="website" placeholder={t.website} />
-                  <Button type="submit">{t.next}</Button>
-                </form>
-              </Card>
-            </motion.div>
-          )}
-
-          {view === 'register-2' && (
-            <motion.div 
-              key="reg2"
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -20 }}
-              className="space-y-6"
-            >
-              <div className="flex items-center gap-4">
-                <button onClick={() => setView('register-1')} className="p-2 hover:bg-white/10 rounded-full transition-colors flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-cyber-cyan">
-                  <ArrowLeft size={16} /> {t.back}
-                </button>
-              </div>
-              <Card className="space-y-6 futuristic-glow">
-                <div className="space-y-2">
-                  <label className="text-[10px] font-bold text-cyber-cyan uppercase tracking-widest">{t.user}</label>
-                  <div className="p-4 bg-white/5 rounded-xl font-mono text-cyber-cyan border border-white/10 text-center text-lg tracking-widest">
-                    {regData.phone}
+                  <div className="space-y-1">
+                    <label className="text-[10px] font-bold text-cyber-cyan uppercase tracking-widest">{t.city}</label>
+                    <Input name="city" placeholder="Ej: Miami" />
                   </div>
-                </div>
-                <form onSubmit={handleRegister2} className="space-y-4">
-                  <Input name="password" type="password" placeholder={t.password} required minLength={6} />
-                  <Input name="confirmPassword" type="password" placeholder={t.confirmPassword} required minLength={6} />
-                  <Button type="submit" disabled={isLoading}>
-                    {isLoading ? "..." : t.createAccount}
+                  <div className="space-y-1">
+                    <label className="text-[10px] font-bold text-cyber-cyan uppercase tracking-widest">Instagram</label>
+                    <Input name="instagram" placeholder="@usuario" />
+                  </div>
+                  
+                  <Button type="submit" disabled={isLoading} className="mt-6">
+                    {isLoading ? "..." : t.next}
                   </Button>
                 </form>
               </Card>
             </motion.div>
           )}
 
-          {view === 'calculator' && (
+          {view === 'calculator' && user && (
             <motion.div 
               key="calc"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              className="space-y-6"
+              className="space-y-8"
             >
               <div className="flex justify-between items-center">
-                <Logo />
-                <button onClick={() => { setUser(null); setView('login'); }} className="p-2 text-white/30 hover:text-red-500 transition-colors">
+                <Logo className="w-32 h-auto" />
+                <button onClick={logout} className="p-2 text-white/40 hover:text-cyber-pink transition-colors">
                   <LogOut size={20} />
                 </button>
               </div>
