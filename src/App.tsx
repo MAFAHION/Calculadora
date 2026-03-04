@@ -45,7 +45,7 @@ interface UserData {
 
 // --- Components ---
 
-const Logo = () => (
+const Logo = ({ t }: { t: any }) => (
   <div className="flex items-center gap-3">
     <div className="relative w-12 h-12 flex items-center justify-center">
       <svg viewBox="0 0 100 100" className="w-full h-full">
@@ -84,7 +84,7 @@ const Logo = () => (
     </div>
     <div className="flex flex-col leading-none">
       <span className="text-xl font-bold tracking-tighter text-white">MA FASHION</span>
-      <span className="text-[9px] tracking-[0.5em] text-electric font-bold uppercase">Freedom Engine</span>
+      <span className="text-[9px] tracking-[0.5em] text-electric font-bold uppercase">{t.title}</span>
     </div>
   </div>
 );
@@ -109,9 +109,9 @@ type Language = 'es' | 'en' | 'pt' | 'zh' | 'fr';
 
 const translations = {
   es: {
-    title: "Freedom Engine",
+    title: "Motor de Libertad",
     subtitle: "Ingeniería de rentabilidad para dueños de salón.",
-    start: "Comenzar",
+    start: "Activar Libertad",
     identity: "Tu Identidad",
     contact: "Contacto Directo",
     whatsapp: "WhatsApp",
@@ -119,7 +119,7 @@ const translations = {
     retail: "Retail",
     impact: "Impacto",
     configService: "Configuración del Servicio",
-    name: "Nombre",
+    name: "Nombre del Servicio",
     price: "Precio Venta ($)",
     time: "Tiempo de Ejecución (Minutos)",
     supplies: "Insumos",
@@ -155,14 +155,20 @@ const translations = {
     lifeDays: "Días de Vida",
     moreProfitable: "Más Rentable",
     consultancy: "Agendar Consultoría Elite",
-    totalInventoryProfit: "Rentabilidad Total del Inventario",
+    totalInventoryProfit: "Tesoro Oculto en tu Inventario",
     recommended: "Recomendado",
-    apps: "servicios / envase"
+    apps: "servicios / envase",
+    inventoryTreasure: "Tesoro Oculto en tu Inventario",
+    clientsSaved: "Clientas que NO necesitas buscar",
+    inventoryProfitability: "Rentabilidad Total del Inventario",
+    reptilian: "Cerebro Reptiliano (Supervivencia)",
+    limbic: "Cerebro Límbico (Emoción)",
+    neocortex: "Neocórtex (Lógica)"
   },
   en: {
     title: "Freedom Engine",
     subtitle: "Profitability engineering for salon owners.",
-    start: "Start",
+    start: "Activate Freedom",
     identity: "Your Identity",
     contact: "Direct Contact",
     whatsapp: "WhatsApp",
@@ -170,7 +176,7 @@ const translations = {
     retail: "Retail",
     impact: "Impact",
     configService: "Service Configuration",
-    name: "Name",
+    name: "Service Name",
     price: "Sale Price ($)",
     time: "Execution Time (Minutes)",
     supplies: "Supplies",
@@ -206,14 +212,20 @@ const translations = {
     lifeDays: "Life Days",
     moreProfitable: "More Profitable",
     consultancy: "Schedule Elite Consultancy",
-    totalInventoryProfit: "Total Inventory Profitability",
+    totalInventoryProfit: "Hidden Treasure in your Inventory",
     recommended: "Recommended",
-    apps: "services / container"
+    apps: "services / container",
+    inventoryTreasure: "Hidden Treasure in your Inventory",
+    clientsSaved: "Clients you DON'T need to find",
+    inventoryProfitability: "Total Inventory Profitability",
+    reptilian: "Reptilian Brain (Survival)",
+    limbic: "Limbic Brain (Emotion)",
+    neocortex: "Neocortex (Logic)"
   },
   pt: {
-    title: "Freedom Engine",
+    title: "Motor de Liberdade",
     subtitle: "Engenharia de lucratividade para donos de salão.",
-    start: "Começar",
+    start: "Ativar Liberdade",
     identity: "Sua Identidade",
     contact: "Contato Direto",
     whatsapp: "WhatsApp",
@@ -221,7 +233,7 @@ const translations = {
     retail: "Varejo",
     impact: "Impacto",
     configService: "Configuração do Serviço",
-    name: "Nome",
+    name: "Nome do Serviço",
     price: "Preço de Venda ($)",
     time: "Tempo de Execução (Minutos)",
     supplies: "Insumos",
@@ -257,14 +269,20 @@ const translations = {
     lifeDays: "Dias de Vida",
     moreProfitable: "Mais Rentável",
     consultancy: "Agendar Consultoria Elite",
-    totalInventoryProfit: "Lucratividade Total do Inventário",
+    totalInventoryProfit: "Tesouro Oculto no seu Inventário",
     recommended: "Recomendado",
-    apps: "serviços / embalagem"
+    apps: "serviços / embalagem",
+    inventoryTreasure: "Tesouro Oculto no seu Inventário",
+    clientsSaved: "Clientes que você NÃO precisa buscar",
+    inventoryProfitability: "Lucratividade Total do Inventário",
+    reptilian: "Cérebro Reptiliano (Sobrevivência)",
+    limbic: "Cérebro Límbico (Emoção)",
+    neocortex: "Neocórtex (Lógica)"
   },
   fr: {
-    title: "Freedom Engine",
+    title: "Moteur de Liberté",
     subtitle: "Ingénierie de rentabilité pour les propriétaires de salons.",
-    start: "Commencer",
+    start: "Activer la Liberté",
     identity: "Votre Identité",
     contact: "Contact Direct",
     whatsapp: "WhatsApp",
@@ -272,7 +290,7 @@ const translations = {
     retail: "Vente",
     impact: "Impact",
     configService: "Configuration du Service",
-    name: "Nom",
+    name: "Nom du Service",
     price: "Prix de Vente ($)",
     time: "Temps d'Exécution (Minutes)",
     supplies: "Fournitures",
@@ -308,14 +326,20 @@ const translations = {
     lifeDays: "Jours de Vie",
     moreProfitable: "Plus Rentable",
     consultancy: "Prendre RDV Conseil Elite",
-    totalInventoryProfit: "Rentabilité Totale de l'Inventaire",
+    totalInventoryProfit: "Trésor Caché dans votre Inventaire",
     recommended: "Recommandé",
-    apps: "services / contenant"
+    apps: "services / contenant",
+    inventoryTreasure: "Trésor Caché dans votre Inventaire",
+    clientsSaved: "Clients que vous n'avez PAS besoin de chercher",
+    inventoryProfitability: "Rentabilité Totale de l'Inventaire",
+    reptilian: "Cerveau Reptilien (Survie)",
+    limbic: "Cerveau Limbique (Émotion)",
+    neocortex: "Néocortex (Logique)"
   },
   zh: {
-    title: "自由引擎 (Freedom Engine)",
+    title: "自由引擎",
     subtitle: "沙龙业主的盈利工程。",
-    start: "开始",
+    start: "启动自由",
     identity: "您的身份",
     contact: "直接联系",
     whatsapp: "WhatsApp",
@@ -323,7 +347,7 @@ const translations = {
     retail: "零售",
     impact: "影响",
     configService: "服务配置",
-    name: "名称",
+    name: "服务名称",
     price: "销售价格 ($)",
     time: "执行时间 (分钟)",
     supplies: "耗材",
@@ -359,9 +383,15 @@ const translations = {
     lifeDays: "生活天数",
     moreProfitable: "更高利润",
     consultancy: "预约精英咨询",
-    totalInventoryProfit: "库存总盈利能力",
+    totalInventoryProfit: "库存中的隐藏宝藏",
     recommended: "推荐",
-    apps: "次服务 / 容器"
+    apps: "次服务 / 容器",
+    inventoryTreasure: "库存中的隐藏宝藏",
+    clientsSaved: "您不需要寻找的客户",
+    inventoryProfitability: "库存总盈利能力",
+    reptilian: "爬行脑（生存）",
+    limbic: "边缘脑（情感）",
+    neocortex: "新皮层（逻辑）"
   }
 };
 
@@ -374,21 +404,17 @@ export default function App() {
   const t = translations[language];
   
   // Freedom Goal
-  const [targetGoal, setTargetGoal] = useState(20000);
+  const [targetGoal, setTargetGoal] = useState(0);
   
   // Salon Service State
-  const [serviceName, setServiceName] = useState('Tratamiento Premium');
-  const [servicePrice, setServicePrice] = useState(250);
-  const [serviceMinutes, setServiceMinutes] = useState(180); // Changed to minutes
-  const [usedProducts, setUsedProducts] = useState<UsedProduct[]>([
-    { id: '1', name: 'Producto Base', containerCost: 120, containerSize: 32, amountUsed: 2 }
-  ]);
+  const [serviceName, setServiceName] = useState('');
+  const [servicePrice, setServicePrice] = useState(0);
+  const [serviceMinutes, setServiceMinutes] = useState(0);
+  const [usedProducts, setUsedProducts] = useState<UsedProduct[]>([]);
   
   // Retail Products State
-  const [retailProducts, setRetailProducts] = useState<RetailProduct[]>([
-    { id: 'r1', name: 'Kit Post-Tratamiento', cost: 35, price: 95 },
-  ]);
-  const [selectedRetailIds, setSelectedRetailIds] = useState<string[]>(['r1']);
+  const [retailProducts, setRetailProducts] = useState<RetailProduct[]>([]);
+  const [selectedRetailIds, setSelectedRetailIds] = useState<string[]>([]);
 
   // --- Logic ---
   const results = useMemo(() => {
@@ -537,7 +563,7 @@ export default function App() {
               </button>
             ))}
           </div>
-          <Logo />
+          <Logo t={t} />
           <h1 className="text-3xl font-serif italic mt-8 mb-2">{t.title}</h1>
           <p className="text-white/40 text-sm mb-8">{t.subtitle}</p>
           <form onSubmit={handleFormSubmit} className="space-y-4 text-left">
@@ -557,7 +583,7 @@ export default function App() {
     <div className="min-h-screen bg-obsidian text-white pb-24">
       {/* Mobile-Friendly Header */}
       <header className="p-6 border-b border-white/5 flex justify-between items-center sticky top-0 bg-obsidian/80 backdrop-blur-xl z-50">
-        <Logo />
+        <Logo t={t} />
         <div className="flex items-center gap-4">
           <select 
             value={language} 
@@ -605,6 +631,31 @@ export default function App() {
                   <Scissors className="text-electric" size={20} />
                   <h2 className="text-sm uppercase tracking-[0.2em] font-bold">{t.configService}</h2>
                 </div>
+
+                {/* Inventory Treasure Card */}
+                <motion.div 
+                  whileHover={{ scale: 1.02 }}
+                  animate={{ y: [0, -4, 0] }}
+                  transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                  className="premium-card p-5 mb-8 border-gold/40 bg-gradient-to-r from-gold/15 to-transparent flex items-center justify-between relative overflow-hidden group shadow-[0_0_30px_rgba(212,175,55,0.1)]"
+                >
+                  <div className="absolute inset-0 bg-gold/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  <div className="flex items-center gap-4 relative z-10">
+                    <div className="w-12 h-12 rounded-full bg-gold/20 flex items-center justify-center text-gold shadow-[0_0_20px_rgba(212,175,55,0.4)]">
+                      <Sparkles size={24} className="animate-pulse" />
+                    </div>
+                    <div>
+                      <span className="text-[10px] uppercase tracking-[0.25em] text-gold font-bold block mb-1 drop-shadow-sm">{t.inventoryTreasure}</span>
+                      <div className="flex items-center gap-2">
+                        <span className="text-[8px] px-2 py-0.5 rounded-full bg-white/5 text-white/40 border border-white/10 uppercase tracking-widest">{t.neocortex}</span>
+                        <span className="text-[8px] px-2 py-0.5 rounded-full bg-gold/20 text-gold border border-gold/30 uppercase tracking-widest font-bold animate-pulse">ROI MAX</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="text-right relative z-10">
+                    <span className="text-3xl font-serif italic text-gold drop-shadow-[0_0_15px_rgba(212,175,55,0.6)]">${results.maxProfitTraditional.toLocaleString()}</span>
+                  </div>
+                </motion.div>
                 
                 <div className="space-y-6">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -641,7 +692,7 @@ export default function App() {
                               <label className="text-[8px] uppercase text-white/20 block mb-1">{t.concept}</label>
                               <input value={p.name} onChange={(e) => updateUsedProduct(p.id, 'name', e.target.value)} className="bg-transparent border-none p-0 text-xs w-full font-bold" />
                             </div>
-                            <button onClick={() => deleteUsedProduct(p.id)} className="text-white/10 hover:text-red-400"><Trash2 size={12} /></button>
+                            <button onClick={() => deleteUsedProduct(p.id)} className="text-white hover:text-red-400"><Trash2 size={12} /></button>
                           </div>
                           <div className="grid grid-cols-3 gap-2">
                             <div>
@@ -665,7 +716,7 @@ export default function App() {
               </section>
 
               {/* Mini Report: Service */}
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
                 <div className="premium-card p-4 text-center">
                   <span className="text-[8px] uppercase tracking-widest text-white/40 block mb-1">{t.realCost}</span>
                   <span className="text-xl font-serif italic text-red-400">${results.totalServiceCost.toFixed(2)}</span>
@@ -678,9 +729,13 @@ export default function App() {
                   <span className="text-[8px] uppercase tracking-widest text-white/40 block mb-1">{t.capacity}</span>
                   <span className="text-xl font-serif italic text-gold">{results.finalMaxServices}</span>
                 </div>
-                <div className="premium-card p-4 text-center">
+                <div className="premium-card p-4 text-center col-span-2 md:col-span-1">
                   <span className="text-[8px] uppercase tracking-widest text-white/40 block mb-1">{t.margin}</span>
                   <span className="text-xl font-serif italic text-white">{(100 - results.costPercentage).toFixed(0)}%</span>
+                </div>
+                <div className="premium-card p-4 text-center col-span-2 md:col-span-2 border-gold/20 bg-gold/[0.02]">
+                  <span className="text-[8px] uppercase tracking-widest text-gold/60 block mb-1">{t.inventoryTreasure}</span>
+                  <span className="text-xl font-serif italic text-gold">${results.maxProfitTraditional.toLocaleString()}</span>
                 </div>
               </div>
 
@@ -709,7 +764,7 @@ export default function App() {
                       <div className="flex items-center gap-3">
                         <input type="checkbox" checked={selectedRetailIds.includes(product.id)} onChange={() => toggleRetailSelection(product.id)} className="w-5 h-5 rounded bg-transparent border-white/10 text-electric focus:ring-electric" />
                         <input value={product.name} onChange={(e) => updateRetailProduct(product.id, 'name', e.target.value)} className="bg-transparent border-none p-0 text-sm w-full font-medium" />
-                        <button onClick={() => deleteRetailProduct(product.id)} className="text-white/10 hover:text-red-400"><Trash2 size={12} /></button>
+                        <button onClick={() => deleteRetailProduct(product.id)} className="text-white hover:text-red-400"><Trash2 size={12} /></button>
                       </div>
                       <div className="grid grid-cols-2 gap-4 pl-8">
                         <div className="space-y-1">
@@ -795,24 +850,40 @@ export default function App() {
               </div>
 
               {/* Total Inventory Profitability (Z) */}
-              <section className="premium-card p-8 bg-white/[0.02] border-gold/20">
-                <div className="flex items-center gap-3 mb-6">
-                  <Package className="text-gold" size={20} />
-                  <h3 className="text-xs uppercase tracking-widest font-bold text-white/60">{t.totalInventoryProfit}</h3>
-                </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                  <div>
-                    <span className="text-[10px] uppercase tracking-widest text-white/20 block mb-2">{t.traditionalModel}</span>
-                    <span className="text-4xl font-light tracking-tighter text-white/60">${results.maxProfitTraditional.toLocaleString()}</span>
-                    <span className="text-[8px] uppercase tracking-widest text-white/10 block mt-1">({results.finalMaxServices} {t.apps})</span>
+              <motion.section 
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                className="premium-card p-8 bg-gradient-to-b from-white/[0.04] to-transparent border-gold/30 relative overflow-hidden group"
+              >
+                <div className="absolute -right-20 -top-20 w-64 h-64 bg-gold/5 blur-[100px] rounded-full group-hover:bg-gold/10 transition-colors duration-700" />
+                <div className="flex items-center gap-3 mb-8 relative z-10">
+                  <div className="p-2 rounded-lg bg-gold/10 text-gold shadow-[0_0_15px_rgba(212,175,55,0.2)]">
+                    <Sparkles size={20} className="animate-pulse" />
                   </div>
-                  <div>
-                    <span className="text-[10px] uppercase tracking-widest text-gold/40 block mb-2">{t.freedomModel}</span>
-                    <span className="text-4xl font-light tracking-tighter text-gold">${results.maxProfitSmart.toLocaleString()}</span>
-                    <span className="text-[8px] uppercase tracking-widest text-gold/20 block mt-1">({results.finalMaxServices} {t.apps})</span>
-                  </div>
+                  <h3 className="text-sm uppercase tracking-[0.25em] font-bold text-white/80">{t.totalInventoryProfit}</h3>
                 </div>
-              </section>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-10 relative z-10">
+                  <div className="p-6 rounded-2xl bg-white/[0.02] border border-white/5 transition-colors hover:bg-white/[0.04]">
+                    <span className="text-[10px] uppercase tracking-[0.3em] text-white/20 block mb-3">{t.traditionalModel}</span>
+                    <div className="flex items-baseline gap-2">
+                      <span className="text-4xl font-light tracking-tighter text-white/40">${results.maxProfitTraditional.toLocaleString()}</span>
+                    </div>
+                    <span className="text-[9px] uppercase tracking-widest text-white/10 block mt-2 font-medium">({results.finalMaxServices} {t.apps})</span>
+                  </div>
+                  <motion.div 
+                    whileHover={{ scale: 1.02 }}
+                    className="p-6 rounded-2xl bg-gold/[0.05] border border-gold/30 shadow-[0_0_40px_rgba(212,175,55,0.1)] relative overflow-hidden"
+                  >
+                    <div className="absolute inset-0 bg-gradient-to-br from-gold/10 to-transparent opacity-50" />
+                    <span className="text-[10px] uppercase tracking-[0.3em] text-gold/60 block mb-3 relative z-10">{t.freedomModel}</span>
+                    <div className="flex items-baseline gap-2 relative z-10">
+                      <span className="text-5xl font-serif italic tracking-tighter text-gold drop-shadow-[0_0_20px_rgba(212,175,55,0.4)]">${results.maxProfitSmart.toLocaleString()}</span>
+                    </div>
+                    <span className="text-[9px] uppercase tracking-widest text-gold/40 block mt-2 font-bold relative z-10">({results.finalMaxServices} {t.apps})</span>
+                  </motion.div>
+                </div>
+              </motion.section>
 
               {/* The "Wow" Impact */}
               <section className="premium-card p-10 bg-gradient-to-br from-electric/10 to-transparent border-electric/20">
@@ -823,6 +894,7 @@ export default function App() {
                   <div>
                     <h2 className="text-2xl font-serif italic">{t.personalVictory}</h2>
                     <p className="text-xs text-white/40">{t.recuperas}</p>
+                    <span className="text-[8px] uppercase tracking-widest text-electric/60 font-bold">{t.limbic}</span>
                   </div>
                 </div>
                 
@@ -838,11 +910,34 @@ export default function App() {
                   <div className="text-center">
                     <span className="text-3xl font-light block text-white">x{results.efficiencyBoost}%</span>
                     <span className="text-[8px] uppercase tracking-widest text-white/40">{t.moreProfitable}</span>
+                    <span className="text-[7px] uppercase tracking-widest text-white/20 block mt-1">{t.neocortex}</span>
                   </div>
+                </div>
+
+                <div className="mt-8 pt-8 border-t border-white/5 flex flex-col items-center">
+                  <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-white/40 mb-3">
+                    <Users size={20} />
+                  </div>
+                  <span className="text-2xl font-light block text-white">{results.clientsSavedOnGoal}</span>
+                  <span className="text-[10px] uppercase tracking-widest text-white/40 text-center">{t.clientsSaved}</span>
+                  <span className="text-[8px] uppercase tracking-widest text-white/20 mt-2">{t.reptilian}</span>
                 </div>
               </section>
 
-              <button className="btn-freedom btn-freedom-primary w-full py-5 flex items-center justify-center gap-3 group">
+              <button 
+                onClick={() => {
+                  const message = encodeURIComponent(`¡Hola! 👋 Acabo de usar el Freedom Engine y me ha volado la cabeza 🤯. Me encantaría agendar mi Consultoría Elite para llevar mi negocio al siguiente nivel de libertad. 
+
+Mis datos:
+👤 Nombre: ${user?.name || ''}
+📧 Email: ${user?.email || ''}
+📱 WhatsApp: ${user?.phone || ''}
+
+¡Espero tu mensaje! ✨`);
+                  window.open(`https://wa.me/14072181294?text=${message}`, '_blank');
+                }}
+                className="btn-freedom btn-freedom-primary w-full py-5 flex items-center justify-center gap-3 group"
+              >
                 {t.consultancy}
                 <ArrowUpRight size={20} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
               </button>
