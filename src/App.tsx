@@ -105,9 +105,273 @@ const StatCard = ({ label, value, icon: Icon, color = "white", subValue }: any) 
   </div>
 );
 
+type Language = 'es' | 'en' | 'pt' | 'zh' | 'fr';
+
+const translations = {
+  es: {
+    title: "Freedom Engine",
+    subtitle: "Ingeniería de rentabilidad para dueños de salón.",
+    start: "Comenzar",
+    identity: "Tu Identidad",
+    contact: "Contacto Directo",
+    whatsapp: "WhatsApp",
+    service: "Servicio",
+    retail: "Retail",
+    impact: "Impacto",
+    configService: "Configuración del Servicio",
+    name: "Nombre",
+    price: "Precio Venta ($)",
+    time: "Tiempo de Ejecución (Minutos)",
+    supplies: "Insumos",
+    add: "AÑADIR",
+    newSupply: "Nuevo Insumo",
+    concept: "Concepto / Nombre",
+    containerCost: "Costo Envase ($)",
+    totalSize: "Tamaño Total (oz/ml)",
+    usage: "Uso por Servicio (oz/ml)",
+    realCost: "Costo Real",
+    netProfit: "Ganancia Neta",
+    capacity: "Capacidad",
+    margin: "Margen",
+    nextRetail: "Siguiente: Retail",
+    boutique: "Boutique de Reventa",
+    new: "NUEVO",
+    newProduct: "Nuevo Producto",
+    cost: "Costo",
+    sale: "Venta",
+    extraProfit: "Ganancia Extra / Clienta",
+    retailRoi: "ROI Retail",
+    back: "Atrás",
+    seeImpact: "Ver Impacto Final",
+    freedomGoal: "Tu Meta de Libertad",
+    modifyGoal: "Modifica el monto para ver el cambio en tu vida.",
+    traditionalModel: "Modelo Tradicional",
+    freedomModel: "Modelo Freedom",
+    clientsNeeded: "Clientas Necesarias",
+    totalEffort: "Esfuerzo Total",
+    personalVictory: "Tu Victoria Personal",
+    recuperas: "Esto es lo que recuperas al mes",
+    freeHours: "Horas Libres",
+    lifeDays: "Días de Vida",
+    moreProfitable: "Más Rentable",
+    consultancy: "Agendar Consultoría Elite",
+    totalInventoryProfit: "Rentabilidad Total del Inventario",
+    recommended: "Recomendado",
+    apps: "servicios / envase"
+  },
+  en: {
+    title: "Freedom Engine",
+    subtitle: "Profitability engineering for salon owners.",
+    start: "Start",
+    identity: "Your Identity",
+    contact: "Direct Contact",
+    whatsapp: "WhatsApp",
+    service: "Service",
+    retail: "Retail",
+    impact: "Impact",
+    configService: "Service Configuration",
+    name: "Name",
+    price: "Sale Price ($)",
+    time: "Execution Time (Minutes)",
+    supplies: "Supplies",
+    add: "ADD",
+    newSupply: "New Supply",
+    concept: "Concept / Name",
+    containerCost: "Container Cost ($)",
+    totalSize: "Total Size (oz/ml)",
+    usage: "Usage per Service (oz/ml)",
+    realCost: "Real Cost",
+    netProfit: "Net Profit",
+    capacity: "Capacity",
+    margin: "Margin",
+    nextRetail: "Next: Retail",
+    boutique: "Retail Boutique",
+    new: "NEW",
+    newProduct: "New Product",
+    cost: "Cost",
+    sale: "Sale",
+    extraProfit: "Extra Profit / Client",
+    retailRoi: "Retail ROI",
+    back: "Back",
+    seeImpact: "See Final Impact",
+    freedomGoal: "Your Freedom Goal",
+    modifyGoal: "Modify the amount to see the change in your life.",
+    traditionalModel: "Traditional Model",
+    freedomModel: "Freedom Model",
+    clientsNeeded: "Necessary Clients",
+    totalEffort: "Total Effort",
+    personalVictory: "Your Personal Victory",
+    recuperas: "This is what you recover per month",
+    freeHours: "Free Hours",
+    lifeDays: "Life Days",
+    moreProfitable: "More Profitable",
+    consultancy: "Schedule Elite Consultancy",
+    totalInventoryProfit: "Total Inventory Profitability",
+    recommended: "Recommended",
+    apps: "services / container"
+  },
+  pt: {
+    title: "Freedom Engine",
+    subtitle: "Engenharia de lucratividade para donos de salão.",
+    start: "Começar",
+    identity: "Sua Identidade",
+    contact: "Contato Direto",
+    whatsapp: "WhatsApp",
+    service: "Serviço",
+    retail: "Varejo",
+    impact: "Impacto",
+    configService: "Configuração do Serviço",
+    name: "Nome",
+    price: "Preço de Venda ($)",
+    time: "Tempo de Execução (Minutos)",
+    supplies: "Insumos",
+    add: "ADICIONAR",
+    newSupply: "Novo Insumo",
+    concept: "Conceito / Nome",
+    containerCost: "Custo da Embalagem ($)",
+    totalSize: "Tamanho Total (oz/ml)",
+    usage: "Uso por Serviço (oz/ml)",
+    realCost: "Custo Real",
+    netProfit: "Lucro Líquido",
+    capacity: "Capacidade",
+    margin: "Margem",
+    nextRetail: "Próximo: Varejo",
+    boutique: "Boutique de Varejo",
+    new: "NOVO",
+    newProduct: "Novo Produto",
+    cost: "Custo",
+    sale: "Venda",
+    extraProfit: "Lucro Extra / Cliente",
+    retailRoi: "ROI de Varejo",
+    back: "Voltar",
+    seeImpact: "Ver Impacto Final",
+    freedomGoal: "Sua Meta de Liberdade",
+    modifyGoal: "Modifique o valor para ver a mudança em sua vida.",
+    traditionalModel: "Modelo Tradicional",
+    freedomModel: "Modelo Freedom",
+    clientsNeeded: "Clientes Necessários",
+    totalEffort: "Esforço Total",
+    personalVictory: "Sua Vitória Pessoal",
+    recuperas: "Isso é o que você recupera por mês",
+    freeHours: "Horas Livres",
+    lifeDays: "Dias de Vida",
+    moreProfitable: "Mais Rentável",
+    consultancy: "Agendar Consultoria Elite",
+    totalInventoryProfit: "Lucratividade Total do Inventário",
+    recommended: "Recomendado",
+    apps: "serviços / embalagem"
+  },
+  fr: {
+    title: "Freedom Engine",
+    subtitle: "Ingénierie de rentabilité pour les propriétaires de salons.",
+    start: "Commencer",
+    identity: "Votre Identité",
+    contact: "Contact Direct",
+    whatsapp: "WhatsApp",
+    service: "Service",
+    retail: "Vente",
+    impact: "Impact",
+    configService: "Configuration du Service",
+    name: "Nom",
+    price: "Prix de Vente ($)",
+    time: "Temps d'Exécution (Minutes)",
+    supplies: "Fournitures",
+    add: "AJOUTER",
+    newSupply: "Nouvelle Fourniture",
+    concept: "Concept / Nom",
+    containerCost: "Coût du Contenant ($)",
+    totalSize: "Taille Totale (oz/ml)",
+    usage: "Utilisation par Service (oz/ml)",
+    realCost: "Coût Réel",
+    netProfit: "Bénéfice Net",
+    capacity: "Capacité",
+    margin: "Marge",
+    nextRetail: "Suivant : Vente",
+    boutique: "Boutique de Vente",
+    new: "NOUVEAU",
+    newProduct: "Nouveau Produit",
+    cost: "Coût",
+    sale: "Vente",
+    extraProfit: "Bénéfice Extra / Client",
+    retailRoi: "ROI Vente",
+    back: "Retour",
+    seeImpact: "Voir l'Impact Final",
+    freedomGoal: "Votre Objectif de Liberté",
+    modifyGoal: "Modifiez le montant pour voir le changement dans votre vie.",
+    traditionalModel: "Modèle Traditionnel",
+    freedomModel: "Modèle Freedom",
+    clientsNeeded: "Clients Nécessaires",
+    totalEffort: "Effort Total",
+    personalVictory: "Votre Victoire Personnelle",
+    recuperas: "C'est ce que vous récupérez par mois",
+    freeHours: "Heures Libres",
+    lifeDays: "Jours de Vie",
+    moreProfitable: "Plus Rentable",
+    consultancy: "Prendre RDV Conseil Elite",
+    totalInventoryProfit: "Rentabilité Totale de l'Inventaire",
+    recommended: "Recommandé",
+    apps: "services / contenant"
+  },
+  zh: {
+    title: "自由引擎 (Freedom Engine)",
+    subtitle: "沙龙业主的盈利工程。",
+    start: "开始",
+    identity: "您的身份",
+    contact: "直接联系",
+    whatsapp: "WhatsApp",
+    service: "服务",
+    retail: "零售",
+    impact: "影响",
+    configService: "服务配置",
+    name: "名称",
+    price: "销售价格 ($)",
+    time: "执行时间 (分钟)",
+    supplies: "耗材",
+    add: "添加",
+    newSupply: "新耗材",
+    concept: "概念 / 名称",
+    containerCost: "容器成本 ($)",
+    totalSize: "总容量 (oz/ml)",
+    usage: "单次服务用量 (oz/ml)",
+    realCost: "实际成本",
+    netProfit: "净利润",
+    capacity: "容量",
+    margin: "利润率",
+    nextRetail: "下一步：零售",
+    boutique: "零售精品店",
+    new: "新增",
+    newProduct: "新产品",
+    cost: "成本",
+    sale: "销售",
+    extraProfit: "每位客户额外利润",
+    retailRoi: "零售投资回报率",
+    back: "返回",
+    seeImpact: "查看最终影响",
+    freedomGoal: "您的自由目标",
+    modifyGoal: "修改金额以查看您生活的变化。",
+    traditionalModel: "传统模式",
+    freedomModel: "自由模式",
+    clientsNeeded: "所需客户数",
+    totalEffort: "总投入",
+    personalVictory: "您的个人胜利",
+    recuperas: "这是您每月恢复的时间",
+    freeHours: "空闲时间",
+    lifeDays: "生活天数",
+    moreProfitable: "更高利润",
+    consultancy: "预约精英咨询",
+    totalInventoryProfit: "库存总盈利能力",
+    recommended: "推荐",
+    apps: "次服务 / 容器"
+  }
+};
+
 export default function App() {
   const [view, setView] = useState<'form' | 'calculator'>('form');
+  const [activeTab, setActiveTab] = useState<'service' | 'retail' | 'impact'>('service');
+  const [language, setLanguage] = useState<Language>('es');
   const [user, setUser] = useState<UserData | null>(null);
+  
+  const t = translations[language];
   
   // Freedom Goal
   const [targetGoal, setTargetGoal] = useState(20000);
@@ -115,27 +379,25 @@ export default function App() {
   // Salon Service State
   const [serviceName, setServiceName] = useState('Tratamiento Premium');
   const [servicePrice, setServicePrice] = useState(250);
-  const [serviceHours, setServiceHours] = useState(3);
+  const [serviceMinutes, setServiceMinutes] = useState(180); // Changed to minutes
   const [usedProducts, setUsedProducts] = useState<UsedProduct[]>([
     { id: '1', name: 'Producto Base', containerCost: 120, containerSize: 32, amountUsed: 2 }
   ]);
   
   // Retail Products State
   const [retailProducts, setRetailProducts] = useState<RetailProduct[]>([
-    { id: 'r1', name: 'Kit Post-Tratamiento Premium', cost: 35, price: 95 },
-    { id: 'r2', name: 'Serum Revitalizante', cost: 20, price: 55 }
+    { id: 'r1', name: 'Kit Post-Tratamiento', cost: 35, price: 95 },
   ]);
   const [selectedRetailIds, setSelectedRetailIds] = useState<string[]>(['r1']);
 
   // --- Logic ---
   const results = useMemo(() => {
-    // Calculate Service Cost from used products
+    // Service Calculations
     const totalServiceCost = usedProducts.reduce((acc, p) => {
       const costPerUnit = p.containerSize > 0 ? p.containerCost / p.containerSize : 0;
       return acc + (costPerUnit * p.amountUsed);
     }, 0);
 
-    // Y = Max Services Possible based on container capacity
     const maxServicesPossible = usedProducts.reduce((min, p) => {
       if (p.amountUsed > 0 && p.containerSize > 0) {
         const possible = Math.floor(p.containerSize / p.amountUsed);
@@ -145,28 +407,28 @@ export default function App() {
     }, Infinity);
 
     const finalMaxServices = maxServicesPossible === Infinity ? 0 : maxServicesPossible;
-
-    // X = Profit per service
     const profitPerService = servicePrice - totalServiceCost;
-    
-    // Retail Logic
+    const serviceHours = serviceMinutes / 60;
+    const costPercentage = servicePrice > 0 ? (totalServiceCost / servicePrice) * 100 : 0;
+
+    // Retail Calculations
     const selectedRetail = retailProducts.filter(p => selectedRetailIds.includes(p.id));
     const retailProfitPerClient = selectedRetail.reduce((acc, p) => acc + (p.price - p.cost), 0);
+    const retailInvestmentPerClient = selectedRetail.reduce((acc, p) => acc + p.cost, 0);
     const totalProfitPerClient = profitPerService + retailProfitPerClient;
 
-    // Z = Max Profit Potential (Traditional vs Smart) for the same inventory capacity
+    // Projections (Z)
     const maxProfitTraditional = finalMaxServices * profitPerService;
     const maxProfitSmart = finalMaxServices * totalProfitPerClient;
     const maxHoursTotal = finalMaxServices * serviceHours;
 
-    // Goal Achievement Analysis (To reach targetGoal)
+    // Goal Analysis
     const clientsNeededTraditional = profitPerService > 0 ? Math.ceil(targetGoal / profitPerService) : 0;
     const hoursNeededTraditional = clientsNeededTraditional * serviceHours;
 
     const clientsNeededSmart = totalProfitPerClient > 0 ? Math.ceil(targetGoal / totalProfitPerClient) : 0;
     const hoursNeededSmart = clientsNeededSmart * serviceHours;
 
-    // Savings for the Goal
     const clientsSavedOnGoal = clientsNeededTraditional - clientsNeededSmart;
     const hoursSavedOnGoal = hoursNeededTraditional - hoursNeededSmart;
     const daysSavedOnGoal = (hoursSavedOnGoal / 8).toFixed(1);
@@ -175,7 +437,10 @@ export default function App() {
     return {
       totalServiceCost,
       profitPerService,
+      serviceHours,
+      costPercentage,
       retailProfitPerClient,
+      retailInvestmentPerClient,
       totalProfitPerClient,
       finalMaxServices,
       maxProfitTraditional,
@@ -190,7 +455,7 @@ export default function App() {
       daysSavedOnGoal,
       efficiencyBoost
     };
-  }, [targetGoal, servicePrice, usedProducts, serviceHours, retailProducts, selectedRetailIds]);
+  }, [targetGoal, servicePrice, usedProducts, serviceMinutes, retailProducts, selectedRetailIds]);
 
   // --- Handlers ---
   const handleFormSubmit = (e: React.FormEvent) => {
@@ -260,505 +525,339 @@ export default function App() {
   if (view === 'form') {
     return (
       <div className="min-h-screen flex items-center justify-center p-6 bg-obsidian">
-        <motion.div 
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          className="w-full max-w-md premium-card p-12 relative overflow-hidden"
-        >
-          <div className="absolute top-0 right-0 w-32 h-32 bg-electric/5 blur-3xl rounded-full -mr-16 -mt-16" />
-          
-          <div className="mb-12 flex justify-center">
-            <Logo />
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="w-full max-w-md premium-card p-10 text-center">
+          <div className="flex justify-center mb-4 gap-2">
+            {(['es', 'en', 'pt', 'fr', 'zh'] as Language[]).map(lang => (
+              <button 
+                key={lang} 
+                onClick={() => setLanguage(lang)}
+                className={`text-[10px] font-bold px-2 py-1 rounded border transition-all ${language === lang ? 'bg-electric text-obsidian border-electric' : 'border-white/10 text-white/40'}`}
+              >
+                {lang.toUpperCase()}
+              </button>
+            ))}
           </div>
-          
-          <div className="mb-10 text-center">
-            <h1 className="text-4xl font-serif italic mb-3 tracking-tight">Diseña tu Libertad</h1>
-            <p className="text-white/40 text-sm font-light leading-relaxed">
-              Descubre cómo trabajar menos y ganar más mediante la ingeniería de rentabilidad.
-            </p>
-          </div>
-
-          <form onSubmit={handleFormSubmit} className="space-y-5">
-            <div className="space-y-1">
-              <label className="stat-label ml-1">Tu Identidad</label>
-              <input name="name" placeholder="Nombre completo" required className="input-premium" />
-            </div>
-            <div className="space-y-1">
-              <label className="stat-label ml-1">Contacto Directo</label>
-              <input name="email" type="email" placeholder="Email profesional" required className="input-premium" />
-            </div>
-            <div className="space-y-1">
-              <label className="stat-label ml-1">WhatsApp</label>
-              <input name="phone" placeholder="+1 (000) 000-0000" required className="input-premium" />
-            </div>
-            
-            <button type="submit" className="btn-freedom btn-freedom-primary w-full mt-6 flex items-center justify-center gap-3 group">
-              Activar Motor de Libertad 
-              <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+          <Logo />
+          <h1 className="text-3xl font-serif italic mt-8 mb-2">{t.title}</h1>
+          <p className="text-white/40 text-sm mb-8">{t.subtitle}</p>
+          <form onSubmit={handleFormSubmit} className="space-y-4 text-left">
+            <input name="name" placeholder={t.identity} required className="input-premium" />
+            <input name="email" type="email" placeholder={t.contact} required className="input-premium" />
+            <input name="phone" placeholder={t.whatsapp} required className="input-premium" />
+            <button type="submit" className="btn-freedom btn-freedom-primary w-full py-4 flex items-center justify-center gap-2">
+              {t.start} <ArrowRight size={18} />
             </button>
           </form>
-          
-          <div className="mt-10 pt-8 border-t border-white/5 text-center">
-            <p className="text-[9px] uppercase tracking-[0.3em] text-white/20">
-              Exclusivo para Dueños de Salón de Alto Rendimiento
-            </p>
-          </div>
         </motion.div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen p-6 md:p-12 max-w-7xl mx-auto bg-obsidian">
-      {/* Header */}
-      <header className="flex flex-col md:flex-row justify-between items-start md:items-center gap-8 mb-16 animate-fade">
+    <div className="min-h-screen bg-obsidian text-white pb-24">
+      {/* Mobile-Friendly Header */}
+      <header className="p-6 border-b border-white/5 flex justify-between items-center sticky top-0 bg-obsidian/80 backdrop-blur-xl z-50">
         <Logo />
-        <div className="flex items-center gap-8">
-          <div className="flex flex-col items-end">
-            <div className="flex items-center gap-2 mb-1">
-              <Target size={12} className="text-electric" />
-              <span className="stat-label mb-0">Meta de Libertad Mensual</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <span className="text-white/20 font-light text-xl">$</span>
-              <input 
-                type="number" 
-                value={targetGoal} 
-                onChange={(e) => setTargetGoal(Number(e.target.value))}
-                className="bg-transparent text-4xl font-serif italic focus:outline-none w-40 border-b border-white/10 hover:border-electric/50 transition-colors"
-              />
-            </div>
-          </div>
-          <button 
-            onClick={() => setView('form')} 
-            className="p-4 rounded-2xl bg-white/5 text-white/20 hover:text-white hover:bg-white/10 transition-all group"
+        <div className="flex items-center gap-4">
+          <select 
+            value={language} 
+            onChange={(e) => setLanguage(e.target.value as Language)}
+            className="bg-transparent text-[10px] font-bold border border-white/10 rounded px-2 py-1 outline-none"
           >
-            <LogOut size={20} className="group-hover:scale-110 transition-transform" />
+            <option value="es">ES</option>
+            <option value="en">EN</option>
+            <option value="pt">PT</option>
+            <option value="fr">FR</option>
+            <option value="zh">ZH</option>
+          </select>
+          <button onClick={() => setView('form')} className="text-white/20 hover:text-white transition-colors">
+            <LogOut size={20} />
           </button>
         </div>
       </header>
 
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
-        {/* Left Column: Configuration */}
-        <div className="lg:col-span-5 space-y-10 animate-fade" style={{ animationDelay: '0.1s' }}>
-          
-          {/* Service Config */}
-          <section className="premium-card p-10 relative overflow-hidden">
-            <div className="absolute top-0 right-0 p-6 opacity-5">
-              <Scissors size={60} />
-            </div>
-            <div className="flex items-center gap-3 mb-8">
-              <div className="w-8 h-8 rounded-lg bg-electric/10 flex items-center justify-center text-electric">
-                <Scissors size={18} />
-              </div>
-              <h2 className="text-xs uppercase tracking-[0.2em] font-bold">Servicio de Salón</h2>
-            </div>
-            
-            <div className="space-y-8">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div>
-                  <label className="stat-label">Nombre del Servicio</label>
-                  <input 
-                    value={serviceName} 
-                    onChange={(e) => setServiceName(e.target.value)}
-                    className="input-premium text-sm"
-                    placeholder="Ej: Balayage Premium"
-                  />
+      {/* Navigation Menu */}
+      <nav className="flex p-2 gap-2 bg-white/5 mx-6 mt-6 rounded-2xl">
+        {[
+          { id: 'service', icon: Scissors, label: t.service },
+          { id: 'retail', icon: Package, label: t.retail },
+          { id: 'impact', icon: Zap, label: t.impact },
+        ].map((tab) => (
+          <button
+            key={tab.id}
+            onClick={() => setActiveTab(tab.id as any)}
+            className={`flex-1 flex items-center justify-center gap-2 py-3 rounded-xl transition-all ${
+              activeTab === tab.id ? 'bg-electric text-obsidian font-bold shadow-lg shadow-electric/20' : 'text-white/40 hover:bg-white/5'
+            }`}
+          >
+            <tab.icon size={16} />
+            <span className="text-xs uppercase tracking-widest hidden md:block">{tab.label}</span>
+          </button>
+        ))}
+      </nav>
+
+      <main className="p-6 max-w-4xl mx-auto">
+        <AnimatePresence mode="wait">
+          {activeTab === 'service' && (
+            <motion.div key="service" initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: 20 }} className="space-y-8">
+              <section className="premium-card p-6">
+                <div className="flex items-center gap-3 mb-6">
+                  <Scissors className="text-electric" size={20} />
+                  <h2 className="text-sm uppercase tracking-[0.2em] font-bold">{t.configService}</h2>
                 </div>
-                <div>
-                  <label className="stat-label">Precio de Venta</label>
-                  <div className="relative">
-                    <span className="absolute left-5 top-1/2 -translate-y-1/2 text-white/20 font-light">$</span>
-                    <input 
-                      type="number" 
-                      value={servicePrice} 
-                      onChange={(e) => setServicePrice(Number(e.target.value))}
-                      className="input-premium pl-12"
-                    />
+                
+                <div className="space-y-6">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="space-y-2">
+                      <label className="text-[10px] uppercase tracking-widest text-white/40 ml-1">{t.name}</label>
+                      <input value={serviceName} onChange={(e) => setServiceName(e.target.value)} className="input-premium" />
+                    </div>
+                    <div className="space-y-2">
+                      <label className="text-[10px] uppercase tracking-widest text-white/40 ml-1">{t.price}</label>
+                      <input type="number" value={servicePrice} onChange={(e) => setServicePrice(Number(e.target.value))} className="input-premium" />
+                    </div>
                   </div>
+
+                  <div className="space-y-2">
+                    <label className="text-[10px] uppercase tracking-widest text-white/40 ml-1">{t.time}</label>
+                    <div className="flex items-center gap-4">
+                      <input type="range" min="15" max="480" step="15" value={serviceMinutes} onChange={(e) => setServiceMinutes(Number(e.target.value))} className="flex-1 accent-electric" />
+                      <span className="text-xl font-serif italic w-20 text-right">{serviceMinutes}m</span>
+                    </div>
+                  </div>
+
+                  <div className="pt-6 border-t border-white/5">
+                    <div className="flex justify-between items-center mb-4">
+                      <h3 className="text-xs font-bold uppercase tracking-widest text-white/60">{t.supplies}</h3>
+                      <button onClick={addUsedProduct} className="text-[10px] text-electric font-bold flex items-center gap-1">
+                        <Plus size={12} /> {t.add}
+                      </button>
+                    </div>
+                    <div className="space-y-3">
+                      {usedProducts.map((p) => (
+                        <div key={p.id} className="p-4 rounded-xl bg-white/[0.02] border border-white/5 space-y-3">
+                          <div className="flex items-center gap-2">
+                            <div className="flex-1">
+                              <label className="text-[8px] uppercase text-white/20 block mb-1">{t.concept}</label>
+                              <input value={p.name} onChange={(e) => updateUsedProduct(p.id, 'name', e.target.value)} className="bg-transparent border-none p-0 text-xs w-full font-bold" />
+                            </div>
+                            <button onClick={() => deleteUsedProduct(p.id)} className="text-white/10 hover:text-red-400"><Trash2 size={12} /></button>
+                          </div>
+                          <div className="grid grid-cols-3 gap-2">
+                            <div>
+                              <label className="text-[8px] uppercase text-white/20 block mb-1">{t.containerCost}</label>
+                              <input type="number" value={p.containerCost} onChange={(e) => updateUsedProduct(p.id, 'containerCost', Number(e.target.value))} className="bg-white/5 rounded-lg p-2 text-[10px] focus:ring-1 focus:ring-electric outline-none w-full" />
+                            </div>
+                            <div>
+                              <label className="text-[8px] uppercase text-white/20 block mb-1">{t.totalSize}</label>
+                              <input type="number" value={p.containerSize} onChange={(e) => updateUsedProduct(p.id, 'containerSize', Number(e.target.value))} className="bg-white/5 rounded-lg p-2 text-[10px] focus:ring-1 focus:ring-electric outline-none w-full" />
+                            </div>
+                            <div>
+                              <label className="text-[8px] uppercase text-white/20 block mb-1">{t.usage}</label>
+                              <input type="number" value={p.amountUsed} onChange={(e) => updateUsedProduct(p.id, 'amountUsed', Number(e.target.value))} className="bg-white/5 rounded-lg p-2 text-[10px] focus:ring-1 focus:ring-electric outline-none border border-electric/20 w-full" />
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+              {/* Mini Report: Service */}
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div className="premium-card p-4 text-center">
+                  <span className="text-[8px] uppercase tracking-widest text-white/40 block mb-1">{t.realCost}</span>
+                  <span className="text-xl font-serif italic text-red-400">${results.totalServiceCost.toFixed(2)}</span>
+                </div>
+                <div className="premium-card p-4 text-center">
+                  <span className="text-[8px] uppercase tracking-widest text-white/40 block mb-1">{t.netProfit}</span>
+                  <span className="text-xl font-serif italic text-electric">${results.profitPerService.toFixed(0)}</span>
+                </div>
+                <div className="premium-card p-4 text-center">
+                  <span className="text-[8px] uppercase tracking-widest text-white/40 block mb-1">{t.capacity}</span>
+                  <span className="text-xl font-serif italic text-gold">{results.finalMaxServices}</span>
+                </div>
+                <div className="premium-card p-4 text-center">
+                  <span className="text-[8px] uppercase tracking-widest text-white/40 block mb-1">{t.margin}</span>
+                  <span className="text-xl font-serif italic text-white">{(100 - results.costPercentage).toFixed(0)}%</span>
                 </div>
               </div>
 
-              <div>
-                <div className="flex justify-between items-center mb-4">
-                  <div className="flex flex-col">
-                    <label className="stat-label mb-0">Insumos Utilizados</label>
-                    {results.finalMaxServices > 0 && (
-                      <span className="text-[10px] text-electric font-bold animate-pulse">
-                        Capacidad: {results.finalMaxServices} servicios / envase
-                      </span>
-                    )}
+              <button onClick={() => setActiveTab('retail')} className="btn-freedom btn-freedom-primary w-full py-4 flex items-center justify-center gap-2">
+                {t.nextRetail} <ArrowRight size={18} />
+              </button>
+            </motion.div>
+          )}
+
+          {activeTab === 'retail' && (
+            <motion.div key="retail" initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: 20 }} className="space-y-8">
+              <section className="premium-card p-6">
+                <div className="flex justify-between items-center mb-6">
+                  <div className="flex items-center gap-3">
+                    <Package className="text-gold" size={20} />
+                    <h2 className="text-sm uppercase tracking-[0.2em] font-bold">{t.boutique}</h2>
                   </div>
-                  <button 
-                    onClick={addUsedProduct}
-                    className="text-[10px] text-electric hover:text-white transition-colors flex items-center gap-1 uppercase tracking-widest font-bold"
-                  >
-                    <Plus size={12} /> Añadir Insumo
+                  <button onClick={addRetailProduct} className="text-[10px] text-gold font-bold flex items-center gap-1">
+                    <Plus size={12} /> {t.new}
                   </button>
                 </div>
-                
+
                 <div className="space-y-4">
-                  {usedProducts.map((p) => (
-                    <div key={p.id} className="p-4 rounded-2xl bg-white/[0.02] border border-white/5 space-y-3">
+                  {retailProducts.map((product) => (
+                    <div key={product.id} className="p-5 rounded-2xl bg-white/[0.02] border border-white/5 space-y-4">
                       <div className="flex items-center gap-3">
-                        <input 
-                          value={p.name}
-                          onChange={(e) => updateUsedProduct(p.id, 'name', e.target.value)}
-                          className="bg-transparent border-none p-0 text-xs focus:ring-0 w-full font-medium"
-                          placeholder="Nombre del producto"
-                        />
-                        <button onClick={() => deleteUsedProduct(p.id)} className="text-white/10 hover:text-red-400">
-                          <Trash2 size={12} />
-                        </button>
+                        <input type="checkbox" checked={selectedRetailIds.includes(product.id)} onChange={() => toggleRetailSelection(product.id)} className="w-5 h-5 rounded bg-transparent border-white/10 text-electric focus:ring-electric" />
+                        <input value={product.name} onChange={(e) => updateRetailProduct(product.id, 'name', e.target.value)} className="bg-transparent border-none p-0 text-sm w-full font-medium" />
+                        <button onClick={() => deleteRetailProduct(product.id)} className="text-white/10 hover:text-red-400"><Trash2 size={12} /></button>
                       </div>
-                      <div className="grid grid-cols-3 gap-3">
-                        <div className="flex flex-col gap-1">
-                          <span className="text-[8px] uppercase text-white/20">Costo Envase</span>
-                          <input 
-                            type="number" 
-                            value={p.containerCost}
-                            onChange={(e) => updateUsedProduct(p.id, 'containerCost', Number(e.target.value))}
-                            className="bg-transparent border-b border-white/5 p-0 text-[10px] focus:ring-0"
-                          />
+                      <div className="grid grid-cols-2 gap-4 pl-8">
+                        <div className="space-y-1">
+                          <span className="text-[8px] uppercase text-white/20">{t.cost}</span>
+                          <input type="number" value={product.cost} onChange={(e) => updateRetailProduct(product.id, 'cost', Number(e.target.value))} className="bg-white/5 rounded-lg p-2 text-xs w-full outline-none" />
                         </div>
-                        <div className="flex flex-col gap-1">
-                          <span className="text-[8px] uppercase text-white/20">Tamaño (oz/ml)</span>
-                          <input 
-                            type="number" 
-                            value={p.containerSize}
-                            onChange={(e) => updateUsedProduct(p.id, 'containerSize', Number(e.target.value))}
-                            className="bg-transparent border-b border-white/5 p-0 text-[10px] focus:ring-0"
-                          />
-                        </div>
-                        <div className="flex flex-col gap-1">
-                          <span className="text-[8px] uppercase text-white/20">Uso (oz/ml)</span>
-                          <input 
-                            type="number" 
-                            value={p.amountUsed}
-                            onChange={(e) => updateUsedProduct(p.id, 'amountUsed', Number(e.target.value))}
-                            className="bg-transparent border-b border-white/5 p-0 text-[10px] focus:ring-0 text-electric font-bold"
-                          />
+                        <div className="space-y-1">
+                          <span className="text-[8px] uppercase text-white/20">{t.sale}</span>
+                          <input type="number" value={product.price} onChange={(e) => updateRetailProduct(product.id, 'price', Number(e.target.value))} className="bg-white/5 rounded-lg p-2 text-xs w-full outline-none border border-gold/20" />
                         </div>
                       </div>
                     </div>
                   ))}
                 </div>
-              </div>
+              </section>
 
-              <div>
-                <label className="stat-label">Horas de Ejecución</label>
-                <div className="relative">
-                  <Clock size={14} className="absolute left-5 top-1/2 -translate-y-1/2 text-white/20" />
-                  <input 
-                    type="number" 
-                    step="0.5"
-                    value={serviceHours} 
-                    onChange={(e) => setServiceHours(Number(e.target.value))}
-                    className="input-premium pl-12"
-                  />
+              {/* Mini Report: Retail */}
+              <div className="grid grid-cols-2 gap-4">
+                <div className="premium-card p-6 border-gold/20 bg-gold/[0.02]">
+                  <span className="text-[10px] uppercase tracking-widest text-gold/60 block mb-2">{t.extraProfit}</span>
+                  <span className="text-3xl font-serif italic text-gold">${results.retailProfitPerClient.toFixed(0)}</span>
+                </div>
+                <div className="premium-card p-6">
+                  <span className="text-[10px] uppercase tracking-widest text-white/40 block mb-2">{t.retailRoi}</span>
+                  <span className="text-3xl font-serif italic text-white">
+                    {results.retailInvestmentPerClient > 0 ? ((results.retailProfitPerClient / results.retailInvestmentPerClient) * 100).toFixed(0) : 0}%
+                  </span>
                 </div>
               </div>
-            </div>
-          </section>
 
-          {/* Retail Boutique */}
-          <section className="premium-card p-10 relative overflow-hidden">
-            <div className="absolute top-0 right-0 p-6 opacity-5">
-              <Package size={60} />
-            </div>
-            <div className="flex justify-between items-center mb-8">
-              <div className="flex items-center gap-3">
-                <div className="w-8 h-8 rounded-lg bg-gold/10 flex items-center justify-center text-gold">
-                  <Package size={18} />
-                </div>
-                <h2 className="text-xs uppercase tracking-[0.2em] font-bold">Boutique Retail</h2>
+              <div className="flex gap-4">
+                <button onClick={() => setActiveTab('service')} className="flex-1 py-4 rounded-2xl bg-white/5 text-white/40 font-bold text-xs uppercase tracking-widest">{t.back}</button>
+                <button onClick={() => setActiveTab('impact')} className="flex-[2] btn-freedom btn-freedom-primary py-4 flex items-center justify-center gap-2">
+                  {t.seeImpact} <Zap size={18} />
+                </button>
               </div>
-              <button 
-                onClick={addRetailProduct}
-                className="btn-freedom btn-freedom-outline py-2 px-4 text-[10px] flex items-center gap-2"
-              >
-                <Plus size={12} /> Nuevo Producto
+            </motion.div>
+          )}
+
+          {activeTab === 'impact' && (
+            <motion.div key="impact" initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.95 }} className="space-y-10">
+              <section className="premium-card p-8 text-center relative overflow-hidden">
+                <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-electric to-transparent" />
+                <span className="text-[10px] uppercase tracking-[0.4em] text-white/40 mb-4 block">{t.freedomGoal}</span>
+                <div className="flex items-center justify-center gap-4 mb-4">
+                  <span className="text-4xl font-light text-white/20">$</span>
+                  <input type="number" value={targetGoal} onChange={(e) => setTargetGoal(Number(e.target.value))} className="bg-transparent text-6xl font-serif italic text-center w-48 focus:outline-none border-b border-white/10" />
+                </div>
+                <p className="text-xs text-white/30 italic">{t.modifyGoal}</p>
+              </section>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                {/* Traditional */}
+                <div className="premium-card p-8 border-red-500/10 bg-red-500/[0.01]">
+                  <h3 className="text-[10px] uppercase tracking-widest text-red-400/60 mb-8 font-bold">{t.traditionalModel}</h3>
+                  <div className="space-y-6">
+                    <div>
+                      <span className="text-4xl font-light block">{results.clientsNeededTraditional}</span>
+                      <span className="text-[10px] uppercase tracking-widest text-white/20">{t.clientsNeeded}</span>
+                    </div>
+                    <div className="pt-6 border-t border-white/5">
+                      <span className="text-2xl font-light block text-white/60">{results.hoursNeededTraditional.toFixed(0)}h</span>
+                      <span className="text-[10px] uppercase tracking-widest text-white/20">{t.totalEffort}</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Smart */}
+                <div className="premium-card p-8 border-electric/30 bg-electric/[0.03] relative">
+                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-electric text-obsidian text-[8px] font-bold px-3 py-1 rounded-full uppercase tracking-widest">{t.recommended}</div>
+                  <h3 className="text-[10px] uppercase tracking-widest text-electric mb-8 font-bold">{t.freedomModel}</h3>
+                  <div className="space-y-6">
+                    <div>
+                      <span className="text-4xl font-light block text-electric">{results.clientsNeededSmart}</span>
+                      <span className="text-[10px] uppercase tracking-widest text-white/20">{t.clientsNeeded}</span>
+                    </div>
+                    <div className="pt-6 border-t border-white/5">
+                      <span className="text-2xl font-light block text-electric">{results.hoursNeededSmart.toFixed(0)}h</span>
+                      <span className="text-[10px] uppercase tracking-widest text-white/20">{t.totalEffort}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Total Inventory Profitability (Z) */}
+              <section className="premium-card p-8 bg-white/[0.02] border-gold/20">
+                <div className="flex items-center gap-3 mb-6">
+                  <Package className="text-gold" size={20} />
+                  <h3 className="text-xs uppercase tracking-widest font-bold text-white/60">{t.totalInventoryProfit}</h3>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                  <div>
+                    <span className="text-[10px] uppercase tracking-widest text-white/20 block mb-2">{t.traditionalModel}</span>
+                    <span className="text-4xl font-light tracking-tighter text-white/60">${results.maxProfitTraditional.toLocaleString()}</span>
+                    <span className="text-[8px] uppercase tracking-widest text-white/10 block mt-1">({results.finalMaxServices} {t.apps})</span>
+                  </div>
+                  <div>
+                    <span className="text-[10px] uppercase tracking-widest text-gold/40 block mb-2">{t.freedomModel}</span>
+                    <span className="text-4xl font-light tracking-tighter text-gold">${results.maxProfitSmart.toLocaleString()}</span>
+                    <span className="text-[8px] uppercase tracking-widest text-gold/20 block mt-1">({results.finalMaxServices} {t.apps})</span>
+                  </div>
+                </div>
+              </section>
+
+              {/* The "Wow" Impact */}
+              <section className="premium-card p-10 bg-gradient-to-br from-electric/10 to-transparent border-electric/20">
+                <div className="flex items-center gap-4 mb-8">
+                  <div className="w-12 h-12 rounded-full bg-electric/20 flex items-center justify-center text-electric">
+                    <Heart size={24} />
+                  </div>
+                  <div>
+                    <h2 className="text-2xl font-serif italic">{t.personalVictory}</h2>
+                    <p className="text-xs text-white/40">{t.recuperas}</p>
+                  </div>
+                </div>
+                
+                <div className="grid grid-cols-3 gap-6">
+                  <div className="text-center">
+                    <span className="text-3xl font-light block text-electric">{results.hoursSavedOnGoal}h</span>
+                    <span className="text-[8px] uppercase tracking-widest text-white/40">{t.freeHours}</span>
+                  </div>
+                  <div className="text-center">
+                    <span className="text-3xl font-light block text-gold">{results.daysSavedOnGoal}</span>
+                    <span className="text-[8px] uppercase tracking-widest text-white/40">{t.lifeDays}</span>
+                  </div>
+                  <div className="text-center">
+                    <span className="text-3xl font-light block text-white">x{results.efficiencyBoost}%</span>
+                    <span className="text-[8px] uppercase tracking-widest text-white/40">{t.moreProfitable}</span>
+                  </div>
+                </div>
+              </section>
+
+              <button className="btn-freedom btn-freedom-primary w-full py-5 flex items-center justify-center gap-3 group">
+                {t.consultancy}
+                <ArrowUpRight size={20} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
               </button>
-            </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </main>
 
-            <div className="space-y-5">
-              <AnimatePresence>
-                {retailProducts.map((product) => (
-                  <motion.div 
-                    key={product.id}
-                    initial={{ opacity: 0, x: -10 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    exit={{ opacity: 0, scale: 0.95 }}
-                    className="p-5 rounded-3xl bg-white/[0.02] border border-white/5 space-y-4 group"
-                  >
-                    <div className="flex items-center gap-4">
-                      <div className="relative flex items-center justify-center">
-                        <input 
-                          type="checkbox" 
-                          checked={selectedRetailIds.includes(product.id)}
-                          onChange={() => toggleRetailSelection(product.id)}
-                          className="w-5 h-5 rounded-lg border-white/10 bg-transparent text-electric focus:ring-electric/50 cursor-pointer"
-                        />
-                      </div>
-                      <input 
-                        value={product.name}
-                        onChange={(e) => updateRetailProduct(product.id, 'name', e.target.value)}
-                        className="bg-transparent border-none p-0 text-sm focus:ring-0 w-full font-medium placeholder:text-white/10"
-                        placeholder="Nombre del producto"
-                      />
-                      <button 
-                        onClick={() => deleteRetailProduct(product.id)} 
-                        className="text-white/5 hover:text-red-400/60 transition-colors"
-                      >
-                        <Trash2 size={14} />
-                      </button>
-                    </div>
-                    <div className="grid grid-cols-2 gap-4 pl-9">
-                      <div className="flex flex-col gap-1">
-                        <span className="text-[8px] uppercase tracking-widest text-white/20">Costo</span>
-                        <div className="relative">
-                          <span className="absolute left-0 top-1/2 -translate-y-1/2 text-white/10 text-[10px]">$</span>
-                          <input 
-                            type="number" 
-                            value={product.cost}
-                            onChange={(e) => updateRetailProduct(product.id, 'cost', Number(e.target.value))}
-                            className="bg-transparent border-b border-white/5 p-0 pl-3 text-xs focus:ring-0 w-full focus:border-white/20 transition-colors"
-                          />
-                        </div>
-                      </div>
-                      <div className="flex flex-col gap-1">
-                        <span className="text-[8px] uppercase tracking-widest text-white/20">Venta</span>
-                        <div className="relative">
-                          <span className="absolute left-0 top-1/2 -translate-y-1/2 text-white/10 text-[10px]">$</span>
-                          <input 
-                            type="number" 
-                            value={product.price}
-                            onChange={(e) => updateRetailProduct(product.id, 'price', Number(e.target.value))}
-                            className="bg-transparent border-b border-white/5 p-0 pl-3 text-xs focus:ring-0 w-full focus:border-white/20 transition-colors"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  </motion.div>
-                ))}
-              </AnimatePresence>
-            </div>
-          </section>
-        </div>
-
-        {/* Right Column: Neuro-Sales Dashboard */}
-        <div className="lg:col-span-7 space-y-10 animate-fade" style={{ animationDelay: '0.2s' }}>
-          
-          {/* Comparison Grid: Goal Achievement */}
-          <div className="space-y-6">
-            <div className="flex items-center gap-3 ml-2">
-              <Target size={18} className="text-electric" />
-              <h3 className="text-sm uppercase tracking-[0.3em] font-bold text-white/60">Camino a tu Meta (${targetGoal.toLocaleString()})</h3>
-            </div>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              {/* Traditional Way */}
-              <div className="premium-card p-10 border-red-500/5 bg-red-500/[0.01] relative group">
-                <div className="flex items-center gap-3 mb-10 text-red-400/60">
-                  <Zap size={14} />
-                  <span className="text-[10px] uppercase tracking-[0.3em] font-bold">Sin Retail (Esclavo)</span>
-                </div>
-                
-                <div className="space-y-10">
-                  <div>
-                    <span className="stat-label">Clientas Necesarias</span>
-                    <div className="flex items-baseline gap-3">
-                      <span className="text-6xl font-light tracking-tighter">{results.clientsNeededTraditional}</span>
-                      <span className="text-white/20 text-xs uppercase tracking-widest">Mujeres</span>
-                    </div>
-                  </div>
-                  
-                  <div className="grid grid-cols-2 gap-8 pt-6 border-t border-white/5">
-                    <div>
-                      <span className="stat-label">Ganancia / Serv.</span>
-                      <div className="stat-value text-white/60">${results.profitPerService.toFixed(0)}</div>
-                    </div>
-                    <div>
-                      <span className="stat-label">Horas Totales</span>
-                      <div className="stat-value text-red-400/40">{results.hoursNeededTraditional}h</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Freedom Way */}
-              <div className="premium-card p-10 border-electric/20 bg-electric/[0.02] relative group overflow-hidden">
-                <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-electric/20 to-transparent" />
-                <div className="flex items-center gap-3 mb-10 text-electric">
-                  <ShieldCheck size={14} />
-                  <span className="text-[10px] uppercase tracking-[0.3em] font-bold">Con Retail (Libertad)</span>
-                </div>
-                
-                <div className="space-y-10">
-                  <div>
-                    <span className="stat-label">Clientas Necesarias</span>
-                    <div className="flex items-baseline gap-3">
-                      <span className="text-6xl font-light tracking-tighter text-electric">{results.clientsNeededSmart}</span>
-                      <span className="text-white/20 text-xs uppercase tracking-widest">Mujeres</span>
-                    </div>
-                  </div>
-                  
-                  <div className="grid grid-cols-2 gap-8 pt-6 border-t border-white/5">
-                    <div>
-                      <span className="stat-label">Ganancia / Clienta</span>
-                      <div className="stat-value text-electric">${results.totalProfitPerClient.toFixed(0)}</div>
-                    </div>
-                    <div>
-                      <span className="stat-label">Horas Totales</span>
-                      <div className="stat-value text-electric">{results.hoursNeededSmart}h</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Comparison Grid: Max Inventory Potential */}
-          <div className="space-y-6">
-            <div className="flex items-center gap-3 ml-2">
-              <Package size={18} className="text-gold" />
-              <h3 className="text-sm uppercase tracking-[0.3em] font-bold text-white/60">Potencial Máximo de tu Inventario ({results.finalMaxServices} Clientas)</h3>
-            </div>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              {/* Traditional Potential */}
-              <div className="premium-card p-10 border-white/5 bg-white/[0.01] relative group">
-                <div className="flex items-center gap-3 mb-10 text-white/40">
-                  <Users size={14} />
-                  <span className="text-[10px] uppercase tracking-[0.3em] font-bold">Potencial Sin Retail</span>
-                </div>
-                
-                <div className="space-y-10">
-                  <div>
-                    <span className="stat-label">Ganancia Máxima</span>
-                    <div className="flex items-baseline gap-3">
-                      <span className="text-6xl font-light tracking-tighter text-white/80">${results.maxProfitTraditional.toLocaleString()}</span>
-                    </div>
-                    <span className="text-[10px] text-white/20 uppercase tracking-widest mt-2 block">Por {results.finalMaxServices} Aplicaciones</span>
-                  </div>
-                  
-                  <div className="grid grid-cols-2 gap-8 pt-6 border-t border-white/5">
-                    <div>
-                      <span className="stat-label">Horas de Trabajo</span>
-                      <div className="stat-value text-white/40">{results.maxHoursTotal}h</div>
-                    </div>
-                    <div>
-                      <span className="stat-label">Eficiencia</span>
-                      <div className="stat-value text-white/20">Básica</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Smart Potential */}
-              <div className="premium-card p-10 border-gold/20 bg-gold/[0.02] relative group overflow-hidden">
-                <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-gold/20 to-transparent" />
-                <div className="flex items-center gap-3 mb-10 text-gold">
-                  <Sparkles size={14} />
-                  <span className="text-[10px] uppercase tracking-[0.3em] font-bold">Potencial Con Retail</span>
-                </div>
-                
-                <div className="space-y-10">
-                  <div>
-                    <span className="stat-label">Ganancia Máxima</span>
-                    <div className="flex items-baseline gap-3">
-                      <span className="text-6xl font-light tracking-tighter text-gold">${results.maxProfitSmart.toLocaleString()}</span>
-                    </div>
-                    <span className="text-[10px] text-gold/40 uppercase tracking-widest mt-2 block">Mismas {results.finalMaxServices} Aplicaciones</span>
-                  </div>
-                  
-                  <div className="grid grid-cols-2 gap-8 pt-6 border-t border-white/5">
-                    <div>
-                      <span className="stat-label">Mismas Horas</span>
-                      <div className="stat-value text-gold/60">{results.maxHoursTotal}h</div>
-                    </div>
-                    <div>
-                      <span className="stat-label">Incremento</span>
-                      <div className="stat-value text-gold">+{((results.maxProfitSmart / results.maxProfitTraditional - 1) * 100).toFixed(0)}%</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* The "Wow" Impact Section */}
-          <section className="premium-card p-12 bg-gradient-to-br from-white/[0.03] to-transparent relative overflow-hidden group">
-            <div className="absolute -right-20 -bottom-20 w-80 h-80 bg-electric/5 blur-[100px] rounded-full group-hover:bg-electric/10 transition-colors" />
-            
-            <div className="max-w-3xl relative z-10">
-              <div className="flex items-center gap-3 mb-8">
-                <Sparkles size={20} className="text-electric animate-pulse" />
-                <h2 className="text-4xl font-serif italic tracking-tight">Tu Victoria sobre el Tiempo</h2>
-              </div>
-              
-              <p className="text-white/50 font-light text-lg leading-relaxed mb-12">
-                Al integrar retail estratégico en tu servicio <span className="text-white font-medium">"{serviceName}"</span>, no solo vendes productos; estás <span className="text-white font-medium">comprando tu propia vida</span>. 
-                Estás eliminando el desgaste de atender a <span className="text-electric font-semibold">{results.clientsSavedOnGoal} clientas</span> al mes 
-                manteniendo exactamente la misma ganancia de <span className="text-white font-medium">${targetGoal.toLocaleString()}</span>.
-              </p>
-              
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
-                <div className="flex flex-col p-6 rounded-3xl bg-white/[0.02] border border-white/5">
-                  <div className="flex items-center gap-2 text-electric mb-3">
-                    <Clock size={16} />
-                    <span className="stat-label mb-0">Tiempo Recuperado</span>
-                  </div>
-                  <span className="text-4xl font-light tracking-tighter">{results.hoursSavedOnGoal}h</span>
-                  <span className="text-[10px] text-white/20 uppercase tracking-widest mt-2">Mensuales</span>
-                </div>
-                
-                <div className="flex flex-col p-6 rounded-3xl bg-white/[0.02] border border-white/5">
-                  <div className="flex items-center gap-2 text-gold mb-3">
-                    <Heart size={16} />
-                    <span className="stat-label mb-0">Días de Vida</span>
-                  </div>
-                  <span className="text-4xl font-light tracking-tighter">{results.daysSavedOnGoal}</span>
-                  <span className="text-[10px] text-white/20 uppercase tracking-widest mt-2">Días libres extra</span>
-                </div>
-
-                <div className="flex flex-col p-6 rounded-3xl bg-white/[0.02] border border-white/5">
-                  <div className="flex items-center gap-2 text-white mb-3">
-                    <TrendingUp size={16} />
-                    <span className="stat-label mb-0">Eficiencia</span>
-                  </div>
-                  <span className="text-4xl font-light tracking-tighter">x{(results.hoursNeededTraditional / results.hoursNeededSmart).toFixed(1)}</span>
-                  <span className="text-[10px] text-white/20 uppercase tracking-widest mt-2">Más productiva</span>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          {/* Neuro-Sales Action Footer */}
-          <div className="flex flex-col md:flex-row gap-8 items-center justify-between p-10 premium-card border-white/10 bg-white/[0.02]">
-            <div className="flex items-center gap-6">
-              <div className="w-16 h-16 rounded-full bg-electric/10 flex items-center justify-center text-electric shadow-[0_0_20px_rgba(0,229,255,0.2)]">
-                <Zap size={32} />
-              </div>
-              <div className="max-w-xs">
-                <p className="text-lg font-medium mb-1">¿Lista para el siguiente nivel?</p>
-                <p className="text-xs text-white/30 leading-relaxed font-light">
-                  Tu cerebro reptil ya sabe que este es el camino. Deja de vender tiempo y empieza a vender libertad.
-                </p>
-              </div>
-            </div>
-            <button className="btn-freedom btn-freedom-primary px-12 py-5 flex items-center gap-3 group">
-              Agendar Consultoría Elite
-              <ArrowUpRight size={18} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-            </button>
-          </div>
-          
-          <footer className="pt-10 text-center">
-            <p className="text-[9px] font-bold uppercase tracking-[0.5em] text-white/10">
-              MA FASHION LLC • Freedom Engine v2.0
-            </p>
-          </footer>
-        </div>
+      {/* Progress Bar (Bottom) */}
+      <div className="fixed bottom-0 left-0 w-full h-1 bg-white/5">
+        <motion.div
+          className="h-full bg-electric shadow-[0_0_10px_rgba(0,229,255,0.5)]"
+          initial={{ width: '33%' }}
+          animate={{ width: activeTab === 'service' ? '33%' : activeTab === 'retail' ? '66%' : '100%' }}
+        />
       </div>
     </div>
   );
