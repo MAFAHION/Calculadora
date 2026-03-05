@@ -122,9 +122,9 @@ const translations = {
     name: "Nombre del Servicio",
     price: "Precio Venta ($)",
     time: "Tiempo de Ejecución (Minutos)",
-    supplies: "Insumos",
+    supplies: "Añade productos del servicio para el cálculo",
     add: "AÑADIR",
-    newSupply: "Nuevo Insumo",
+    newSupply: "Nombre del Producto",
     concept: "Concepto / Nombre",
     containerCost: "Costo del Producto ($)",
     totalSize: "Tamaño Total (oz/ml)",
@@ -134,13 +134,13 @@ const translations = {
     capacity: "Aplicaciones Máximas",
     margin: "Margen",
     nextRetail: "Siguiente: Retail",
-    boutique: "Boutique de Reventa",
+    boutique: "Añade productos para cuidado en casa para el cálculo",
     new: "NUEVO",
     newProduct: "Nuevo Producto",
     cost: "Costo del Producto",
     sale: "Venta",
     extraProfit: "Ganancia Extra / Clienta",
-    retailRoi: "ROI Retail",
+    retailRoi: "% de Ganancia",
     back: "Atrás",
     seeImpact: "Ver Impacto Final",
     freedomGoal: "Tu Meta de Libertad",
@@ -159,11 +159,8 @@ const translations = {
     recommended: "Recomendado",
     apps: "servicios / envase",
     inventoryTreasure: "Ganancia total por las {0} aplicaciones máximas",
-    clientsSaved: "{0} Clientas que NO necesitas buscar para alcanzar {1}$ de tu meta de libertad",
-    inventoryProfitability: "Rentabilidad Total del Inventario",
-    reptilian: "Cerebro Reptiliano (Supervivencia)",
-    limbic: "Cerebro Límbico (Emoción)",
-    neocortex: "Neocórtex (Lógica)"
+    clientsSaved: "Clientas que NO necesitas buscar para alcanzar {1}$ de tu meta de libertad",
+    inventoryProfitability: "Rentabilidad Total del Inventario"
   },
   en: {
     title: "Calculate your Freedom",
@@ -179,9 +176,9 @@ const translations = {
     name: "Service Name",
     price: "Sale Price ($)",
     time: "Execution Time (Minutes)",
-    supplies: "Supplies",
+    supplies: "Add service products for the calculation",
     add: "ADD",
-    newSupply: "New Supply",
+    newSupply: "Product Name",
     concept: "Concept / Name",
     containerCost: "Product Cost ($)",
     totalSize: "Total Size (oz/ml)",
@@ -191,13 +188,13 @@ const translations = {
     capacity: "Maximum Applications",
     margin: "Margin",
     nextRetail: "Next: Retail",
-    boutique: "Retail Boutique",
+    boutique: "Add home care products for the calculation",
     new: "NEW",
     newProduct: "New Product",
     cost: "Product Cost",
     sale: "Sale",
     extraProfit: "Extra Profit / Client",
-    retailRoi: "Retail ROI",
+    retailRoi: "% Profit",
     back: "Back",
     seeImpact: "See Final Impact",
     freedomGoal: "Your Freedom Goal",
@@ -216,11 +213,8 @@ const translations = {
     recommended: "Recommended",
     apps: "services / container",
     inventoryTreasure: "Total profit for the {0} maximum applications",
-    clientsSaved: "{0} Clients you DON'T need to find to reach your {1}$ freedom goal",
-    inventoryProfitability: "Total Inventory Profitability",
-    reptilian: "Reptilian Brain (Survival)",
-    limbic: "Limbic Brain (Emotion)",
-    neocortex: "Neocortex (Logic)"
+    clientsSaved: "Clients you DON'T need to find to reach your {1}$ freedom goal",
+    inventoryProfitability: "Total Inventory Profitability"
   },
   pt: {
     title: "Calcula tua Liberdade",
@@ -236,11 +230,11 @@ const translations = {
     name: "Nome do Serviço",
     price: "Preço de Venda ($)",
     time: "Tempo de Execução (Minutos)",
-    supplies: "Insumos",
+    supplies: "Adicione produtos de serviço para o cálculo",
     add: "ADICIONAR",
-    newSupply: "Novo Insumo",
+    newSupply: "Nome do Produto",
     concept: "Conceito / Nome",
-    containerCost: "Custo do Produto ($)",
+    containerCost: "Custo do Producto ($)",
     totalSize: "Tamanho Total (oz/ml)",
     usage: "Uso por Serviço (oz/ml)",
     realCost: "Custo Real",
@@ -248,13 +242,13 @@ const translations = {
     capacity: "Aplicações Máximas",
     margin: "Margem",
     nextRetail: "Próximo: Varejo",
-    boutique: "Boutique de Varejo",
+    boutique: "Adicione produtos de cuidados domiciliares para o cálculo",
     new: "NOVO",
     newProduct: "Novo Produto",
-    cost: "Costo del Producto",
+    cost: "Custo do Producto",
     sale: "Venda",
     extraProfit: "Lucro Extra / Cliente",
-    retailRoi: "ROI de Varejo",
+    retailRoi: "% de Lucro",
     back: "Voltar",
     seeImpact: "Ver Impacto Final",
     freedomGoal: "Sua Meta de Liberdade",
@@ -270,14 +264,11 @@ const translations = {
     moreProfitable: "Mais Rentável",
     consultancy: "Agendar Consultoria Elite",
     totalInventoryProfit: "Lucro total pelas {0} aplicações máximas",
-    recommended: "Recommandé",
-    apps: "serviços / embalagem",
+    recommended: "Recomendado",
+    apps: "servicios / embalagem",
     inventoryTreasure: "Lucro total pelas {0} aplicações máximas",
-    clientsSaved: "{0} Clientes que você NÃO precisa buscar para atingir sua meta de liberdade de {1}$",
-    inventoryProfitability: "Lucratividade Total do Inventário",
-    reptilian: "Cérebro Reptiliano (Sobrevivência)",
-    limbic: "Cérebro Límbico (Emoção)",
-    neocortex: "Neocórtex (Lógica)"
+    clientsSaved: "Clientes que você NÃO precisa buscar para atingir sua meta de liberdade de {1}$",
+    inventoryProfitability: "Lucratividade Total do Inventário"
   },
   fr: {
     title: "Calculez votre Liberté",
@@ -293,9 +284,9 @@ const translations = {
     name: "Nom du Service",
     price: "Prix de Vente ($)",
     time: "Temps d'Exécution (Minutes)",
-    supplies: "Fournitures",
+    supplies: "Ajouter des produits de service pour le calcul",
     add: "AJOUTER",
-    newSupply: "Nouvelle Fourniture",
+    newSupply: "Nom du Produit",
     concept: "Concept / Nom",
     containerCost: "Coût du Produit ($)",
     totalSize: "Taille Totale (oz/ml)",
@@ -305,13 +296,13 @@ const translations = {
     capacity: "Applications Maximales",
     margin: "Marge",
     nextRetail: "Suivant : Vente",
-    boutique: "Boutique de Vente",
+    boutique: "Ajouter des produits de soins à domicile pour le calcul",
     new: "NOUVEAU",
     newProduct: "Nouveau Produit",
     cost: "Coût du Produit",
     sale: "Vente",
     extraProfit: "Bénéfice Extra / Client",
-    retailRoi: "ROI Vente",
+    retailRoi: "% de Profit",
     back: "Retour",
     seeImpact: "Voir l'Impact Final",
     freedomGoal: "Votre Objectif de Liberté",
@@ -330,11 +321,8 @@ const translations = {
     recommended: "Recommandé",
     apps: "services / contenant",
     inventoryTreasure: "Bénéfice total pour les {0} applications maximales",
-    clientsSaved: "{0} Clients que vous n'avez PAS besoin de chercher pour atteindre votre objectif de liberté de {1}$",
-    inventoryProfitability: "Rentabilité Totale de l'Inventaire",
-    reptilian: "Cerveau Reptilien (Survie)",
-    limbic: "Cerveau Limbique (Émotion)",
-    neocortex: "Néocortex (Logique)"
+    clientsSaved: "Clients que vous n'avez PAS besoin de chercher pour atteindre votre objectif de liberté de {1}$",
+    inventoryProfitability: "Rentabilité Totale de l'Inventaire"
   },
   zh: {
     title: "计算你的自由",
@@ -350,9 +338,9 @@ const translations = {
     name: "服务名称",
     price: "销售价格 ($)",
     time: "执行时间 (分钟)",
-    supplies: "耗材",
+    supplies: "添加服务产品进行计算",
     add: "添加",
-    newSupply: "新耗材",
+    newSupply: "产品名称",
     concept: "概念 / 名称",
     containerCost: "产品成本 ($)",
     totalSize: "总容量 (oz/ml)",
@@ -362,13 +350,13 @@ const translations = {
     capacity: "最大应用次数",
     margin: "利润率",
     nextRetail: "下一步：零售",
-    boutique: "零售精品店",
+    boutique: "添加家居护理产品进行计算",
     new: "新增",
     newProduct: "新产品",
     cost: "产品成本",
     sale: "销售",
     extraProfit: "每位客户额外利润",
-    retailRoi: "零售投资回报率",
+    retailRoi: "利润百分比",
     back: "返回",
     seeImpact: "查看最终影响",
     freedomGoal: "您的自由目标",
@@ -387,11 +375,8 @@ const translations = {
     recommended: "推荐",
     apps: "次服务 / 容器",
     inventoryTreasure: "{0}次最大应用的利润总额",
-    clientsSaved: "您不需要寻找{0}位客户即可达到{1}$的自由目标",
-    inventoryProfitability: "库存总盈利能力",
-    reptilian: "爬行脑（生存）",
-    limbic: "边缘脑（情感）",
-    neocortex: "新皮层（逻辑）"
+    clientsSaved: "为了达到 {1}$ 的自由目标，您不需要寻找的客户数",
+    inventoryProfitability: "库存总盈利能力"
   }
 };
 
@@ -443,6 +428,8 @@ export default function App() {
     // Retail Calculations
     const retailProfitPerClient = retailProducts.reduce((acc, p) => acc + (p.price - p.cost), 0);
     const retailInvestmentPerClient = retailProducts.reduce((acc, p) => acc + p.cost, 0);
+    const totalRetailSalesPrice = retailProducts.reduce((acc, p) => acc + p.price, 0);
+    const retailProfitPercentage = totalRetailSalesPrice > 0 ? (retailProfitPerClient / totalRetailSalesPrice) * 100 : 0;
     const totalProfitPerClient = profitPerService + retailProfitPerClient;
 
     // Projections (Z)
@@ -469,6 +456,7 @@ export default function App() {
       costPercentage,
       retailProfitPerClient,
       retailInvestmentPerClient,
+      retailProfitPercentage,
       totalProfitPerClient,
       finalMaxServices,
       maxProfitTraditional,
@@ -565,17 +553,17 @@ export default function App() {
           <form onSubmit={handleFormSubmit} className="space-y-4 text-left">
             <div className="relative">
               <Users className="absolute left-4 top-1/2 -translate-y-1/2 text-white/20" size={18} />
-              <input name="name" placeholder={t.identity} required className="input-premium pl-12" />
+              <input name="name" placeholder={t.identity} required className="input-premium pl-12 text-base md:text-sm" />
             </div>
             <div className="relative">
               <LogOut className="absolute left-4 top-1/2 -translate-y-1/2 text-white/20 rotate-180" size={18} />
-              <input name="email" type="email" placeholder={t.contact} required className="input-premium pl-12" />
+              <input name="email" type="email" placeholder={t.contact} required className="input-premium pl-12 text-base md:text-sm" />
             </div>
             <div className="relative">
               <Package className="absolute left-4 top-1/2 -translate-y-1/2 text-white/20" size={18} />
-              <input name="phone" type="tel" placeholder={t.whatsapp} required className="input-premium pl-12" />
+              <input name="phone" type="tel" placeholder={t.whatsapp} required className="input-premium pl-12 text-base md:text-sm" />
             </div>
-            <button type="submit" className="btn-freedom btn-freedom-primary w-full py-4 flex items-center justify-center gap-2">
+            <button type="submit" className="btn-freedom btn-freedom-primary w-full py-4 flex items-center justify-center gap-2 text-base md:text-sm">
               {t.start} <ArrowRight size={18} />
             </button>
           </form>
@@ -641,11 +629,11 @@ export default function App() {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div className="space-y-2">
                       <label className="text-[10px] uppercase tracking-widest text-white/40 ml-1">{t.name}</label>
-                      <input value={serviceName} onChange={(e) => setServiceName(e.target.value)} className="input-premium" placeholder={t.name} />
+                      <input value={serviceName} onChange={(e) => setServiceName(e.target.value)} className="input-premium text-base md:text-sm" placeholder={t.name} />
                     </div>
                     <div className="space-y-2">
                       <label className="text-[10px] uppercase tracking-widest text-white/40 ml-1">{t.price}</label>
-                      <input type="number" value={servicePrice} onChange={(e) => setServicePrice(e.target.value)} className="input-premium" placeholder="0" />
+                      <input type="number" value={servicePrice} onChange={(e) => setServicePrice(e.target.value)} className="input-premium text-base md:text-sm" placeholder="0" />
                     </div>
                   </div>
 
@@ -658,7 +646,8 @@ export default function App() {
                   </div>
 
                   <div className="pt-6 border-t border-white/5">
-                    <div className="flex justify-between items-center mb-4">
+                    <div className="flex items-center gap-3 mb-6">
+                      <Package className="text-electric" size={20} />
                       <h3 className="text-xs font-bold uppercase tracking-widest text-white/60">{t.supplies}</h3>
                     </div>
                     <div className="space-y-3">
@@ -667,28 +656,28 @@ export default function App() {
                           <div className="flex items-center gap-2">
                             <div className="flex-1">
                               <label className="text-[8px] uppercase text-white/20 block mb-1">{t.concept}</label>
-                              <input value={p.name} onChange={(e) => updateUsedProduct(p.id, 'name', e.target.value)} className="bg-transparent border-none p-0 text-xs w-full font-bold" />
+                              <input value={p.name} onChange={(e) => updateUsedProduct(p.id, 'name', e.target.value)} className="bg-transparent border-none p-0 text-base md:text-xs w-full font-bold" />
                             </div>
                             <button onClick={() => deleteUsedProduct(p.id)} className="text-white hover:text-red-400"><Trash2 size={12} /></button>
                           </div>
                           <div className="grid grid-cols-3 gap-2">
                             <div>
                               <label className="text-[8px] uppercase text-white/20 block mb-1">{t.containerCost}</label>
-                              <input type="number" value={p.containerCost} onChange={(e) => updateUsedProduct(p.id, 'containerCost', e.target.value)} className="bg-white/5 rounded-lg p-2 text-[10px] focus:ring-1 focus:ring-electric outline-none w-full" placeholder="0" />
+                              <input type="number" value={p.containerCost} onChange={(e) => updateUsedProduct(p.id, 'containerCost', e.target.value)} className="bg-white/5 rounded-lg p-2 text-base md:text-[10px] focus:ring-1 focus:ring-electric outline-none w-full" placeholder="0" />
                             </div>
                             <div>
                               <label className="text-[8px] uppercase text-white/20 block mb-1">{t.totalSize}</label>
-                              <input type="number" value={p.containerSize} onChange={(e) => updateUsedProduct(p.id, 'containerSize', e.target.value)} className="bg-white/5 rounded-lg p-2 text-[10px] focus:ring-1 focus:ring-electric outline-none w-full" placeholder="0" />
+                              <input type="number" value={p.containerSize} onChange={(e) => updateUsedProduct(p.id, 'containerSize', e.target.value)} className="bg-white/5 rounded-lg p-2 text-base md:text-[10px] focus:ring-1 focus:ring-electric outline-none w-full" placeholder="0" />
                             </div>
                             <div>
                               <label className="text-[8px] uppercase text-white/20 block mb-1">{t.usage}</label>
-                              <input type="number" value={p.amountUsed} onChange={(e) => updateUsedProduct(p.id, 'amountUsed', e.target.value)} className="bg-white/5 rounded-lg p-2 text-[10px] focus:ring-1 focus:ring-electric outline-none border border-electric/20 w-full" placeholder="0" />
+                              <input type="number" value={p.amountUsed} onChange={(e) => updateUsedProduct(p.id, 'amountUsed', e.target.value)} className="bg-white/5 rounded-lg p-2 text-base md:text-[10px] focus:ring-1 focus:ring-electric outline-none border border-electric/20 w-full" placeholder="0" />
                             </div>
                           </div>
                         </div>
                       ))}
                     </div>
-                    <button onClick={addUsedProduct} className="mt-4 w-full py-3 rounded-xl border border-dashed border-white/10 text-[10px] text-electric font-bold flex items-center justify-center gap-1 hover:bg-white/5 transition-all">
+                    <button onClick={addUsedProduct} className="mt-4 w-full py-3 rounded-xl border border-dashed border-white/10 text-base md:text-[10px] text-electric font-bold flex items-center justify-center gap-1 hover:bg-white/5 transition-all">
                       <Plus size={12} /> {t.add}
                     </button>
                   </div>
@@ -739,23 +728,23 @@ export default function App() {
                   {retailProducts.map((product) => (
                     <div key={product.id} className="p-5 rounded-2xl bg-white/[0.02] border border-white/5 space-y-4">
                       <div className="flex items-center gap-3">
-                        <input value={product.name} onChange={(e) => updateRetailProduct(product.id, 'name', e.target.value)} className="bg-transparent border-none p-0 text-sm w-full font-medium" />
+                        <input value={product.name} onChange={(e) => updateRetailProduct(product.id, 'name', e.target.value)} className="bg-transparent border-none p-0 text-base md:text-sm w-full font-medium" />
                         <button onClick={() => deleteRetailProduct(product.id)} className="text-white hover:text-red-400"><Trash2 size={12} /></button>
                       </div>
                       <div className="grid grid-cols-2 gap-4">
                         <div className="space-y-1">
                           <span className="text-[8px] uppercase text-white/20">{t.cost}</span>
-                          <input type="number" value={product.cost} onChange={(e) => updateRetailProduct(product.id, 'cost', e.target.value)} className="bg-white/5 rounded-lg p-2 text-xs w-full outline-none" placeholder="0" />
+                          <input type="number" value={product.cost} onChange={(e) => updateRetailProduct(product.id, 'cost', e.target.value)} className="bg-white/5 rounded-lg p-2 text-base md:text-xs w-full outline-none" placeholder="0" />
                         </div>
                         <div className="space-y-1">
                           <span className="text-[8px] uppercase text-white/20">{t.sale}</span>
-                          <input type="number" value={product.price} onChange={(e) => updateRetailProduct(product.id, 'price', e.target.value)} className="bg-white/5 rounded-lg p-2 text-xs w-full outline-none border border-gold/20" placeholder="0" />
+                          <input type="number" value={product.price} onChange={(e) => updateRetailProduct(product.id, 'price', e.target.value)} className="bg-white/5 rounded-lg p-2 text-base md:text-xs w-full outline-none border border-gold/20" placeholder="0" />
                         </div>
                       </div>
                     </div>
                   ))}
                 </div>
-                <button onClick={addRetailProduct} className="mt-4 w-full py-3 rounded-xl border border-dashed border-gold/20 text-[10px] text-gold font-bold flex items-center justify-center gap-1 hover:bg-gold/5 transition-all">
+                <button onClick={addRetailProduct} className="mt-4 w-full py-3 rounded-xl border border-dashed border-gold/20 text-base md:text-[10px] text-gold font-bold flex items-center justify-center gap-1 hover:bg-gold/5 transition-all">
                   <Plus size={12} /> {t.new}
                 </button>
               </section>
@@ -769,7 +758,7 @@ export default function App() {
                 <div className="premium-card p-6">
                   <span className="text-[10px] uppercase tracking-widest text-white/40 block mb-2">{t.retailRoi}</span>
                   <span className="text-3xl font-serif italic text-white">
-                    {results.retailInvestmentPerClient > 0 ? ((results.retailProfitPerClient / results.retailInvestmentPerClient) * 100).toFixed(0) : 0}%
+                    {results.retailProfitPercentage.toFixed(0)}%
                   </span>
                 </div>
               </div>
@@ -894,14 +883,13 @@ export default function App() {
                 </div>
 
                 <div className="mt-8 pt-8 border-t border-white/5 flex flex-col items-center">
-                  <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-white/40 mb-3">
-                    <Users size={20} />
+                  <div className="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center text-white/40 mb-4">
+                    <Users size={24} />
                   </div>
-                  <span className="text-2xl font-light block text-white">{results.clientsSavedOnGoal}</span>
-                  <span className="text-[10px] uppercase tracking-widest text-white/40 text-center px-6">
-                    {t.clientsSaved.replace('{0}', results.clientsSavedOnGoal.toString()).replace('{1}', results.tGoal.toString())}
+                  <span className="text-6xl font-serif italic block text-gold mb-2 drop-shadow-[0_0_15px_rgba(212,175,55,0.4)]">{results.clientsSavedOnGoal}</span>
+                  <span className="text-lg md:text-sm uppercase tracking-widest text-white/60 text-center px-6 font-serif italic leading-relaxed">
+                    {t.clientsSaved.replace('{1}', results.tGoal.toString())}
                   </span>
-                  <span className="text-[8px] uppercase tracking-widest text-white/20 mt-2">{t.reptilian}</span>
                 </div>
               </section>
 
