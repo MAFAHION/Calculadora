@@ -159,8 +159,7 @@ const translations = {
     recommended: "Recomendado",
     apps: "servicios / envase",
     inventoryTreasure: "Ganancia total por las {0} aplicaciones máximas",
-    clientsSaved: "Clientas que NO necesitas buscar para alcanzar {1}$ de tu meta de libertad",
-    inventoryProfitability: "Rentabilidad Total del Inventario"
+    clientsSaved: "Tu Margen de Libertad Estratégica: Al optimizar tu ingeniería de lucro, liberas tu energía de la búsqueda constante. Estas son las clientas que ya no representan un esfuerzo de supervivencia, sino tu victoria sobre el tiempo para alcanzar tus {1}$."
   },
   en: {
     title: "Calculate your Freedom",
@@ -213,8 +212,7 @@ const translations = {
     recommended: "Recommended",
     apps: "services / container",
     inventoryTreasure: "Total profit for the {0} maximum applications",
-    clientsSaved: "Clients you DON'T need to find to reach your {1}$ freedom goal",
-    inventoryProfitability: "Total Inventory Profitability"
+    clientsSaved: "Your Strategic Freedom Margin: By optimizing your profit engineering, you free your energy from constant searching. These are the clients that no longer represent a survival effort, but your victory over time to reach your {1}$."
   },
   pt: {
     title: "Calcula tua Liberdade",
@@ -267,8 +265,7 @@ const translations = {
     recommended: "Recomendado",
     apps: "servicios / embalagem",
     inventoryTreasure: "Lucro total pelas {0} aplicações máximas",
-    clientsSaved: "Clientes que você NÃO precisa buscar para atingir sua meta de liberdade de {1}$",
-    inventoryProfitability: "Lucratividade Total do Inventário"
+    clientsSaved: "Sua Margem de Liberdade Estratégica: Ao otimizar sua engenharia de lucro, você libera sua energia da busca constante. Estas são as clientes que não representam mais um esforço de sobrevivência, mas sua vitória sobre o tempo para atingir seus {1}$."
   },
   fr: {
     title: "Calculez votre Liberté",
@@ -321,8 +318,7 @@ const translations = {
     recommended: "Recommandé",
     apps: "services / contenant",
     inventoryTreasure: "Bénéfice total pour les {0} applications maximales",
-    clientsSaved: "Clients que vous n'avez PAS besoin de chercher pour atteindre votre objectif de liberté de {1}$",
-    inventoryProfitability: "Rentabilité Totale de l'Inventaire"
+    clientsSaved: "Votre Marge de Liberté Stratégique : En optimisant votre ingénierie de profit, vous libérez votre énergie de la recherche constante. Ce sont les clientes qui ne représentent plus un effort de survie, mais votre victoire sur le temps pour atteindre vos {1}$."
   },
   zh: {
     title: "计算你的自由",
@@ -375,8 +371,7 @@ const translations = {
     recommended: "推荐",
     apps: "次服务 / 容器",
     inventoryTreasure: "{0}次最大应用的利润总额",
-    clientsSaved: "为了达到 {1}$ 的自由目标，您不需要寻找的客户数",
-    inventoryProfitability: "库存总盈利能力"
+    clientsSaved: "您的战略自由边际：通过优化您的利润工程，您将精力从不断的寻找中解放出来。这些客户不再代表生存努力，而是您战胜时间以达到 {1}$ 目标的胜利。"
   }
 };
 
@@ -551,17 +546,14 @@ export default function App() {
           <h1 className="text-3xl font-serif italic mt-8 mb-2">{t.title}</h1>
           <p className="text-white/40 text-sm mb-8">{t.subtitle}</p>
           <form onSubmit={handleFormSubmit} className="space-y-4 text-left">
-            <div className="relative">
-              <Users className="absolute left-4 top-1/2 -translate-y-1/2 text-white/20" size={18} />
-              <input name="name" placeholder={t.identity} required className="input-premium pl-12 text-base md:text-sm" />
+            <div>
+              <input name="name" placeholder={t.identity} required className="input-premium text-base md:text-sm" />
             </div>
-            <div className="relative">
-              <LogOut className="absolute left-4 top-1/2 -translate-y-1/2 text-white/20 rotate-180" size={18} />
-              <input name="email" type="email" placeholder={t.contact} required className="input-premium pl-12 text-base md:text-sm" />
+            <div>
+              <input name="email" type="email" placeholder={t.contact} required className="input-premium text-base md:text-sm" />
             </div>
-            <div className="relative">
-              <Package className="absolute left-4 top-1/2 -translate-y-1/2 text-white/20" size={18} />
-              <input name="phone" type="tel" placeholder={t.whatsapp} required className="input-premium pl-12 text-base md:text-sm" />
+            <div>
+              <input name="phone" type="tel" placeholder={t.whatsapp} required className="input-premium text-base md:text-sm" />
             </div>
             <button type="submit" className="btn-freedom btn-freedom-primary w-full py-4 flex items-center justify-center gap-2 text-base md:text-sm">
               {t.start} <ArrowRight size={18} />
@@ -883,13 +875,15 @@ export default function App() {
                 </div>
 
                 <div className="mt-8 pt-8 border-t border-white/5 flex flex-col items-center">
-                  <div className="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center text-white/40 mb-4">
-                    <Users size={24} />
+                  <div className="premium-card p-8 border-gold/30 bg-gold/[0.03] text-center relative overflow-hidden">
+                    <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-gold to-transparent opacity-50" />
+                    <span className="text-7xl font-serif italic block text-gold mb-4 drop-shadow-[0_0_20px_rgba(212,175,55,0.5)] leading-none">
+                      {results.clientsSavedOnGoal}
+                    </span>
+                    <p className="text-base md:text-sm text-white/80 leading-relaxed font-serif italic px-2">
+                      {t.clientsSaved.replace('{1}', results.tGoal.toString())}
+                    </p>
                   </div>
-                  <span className="text-6xl font-serif italic block text-gold mb-2 drop-shadow-[0_0_15px_rgba(212,175,55,0.4)]">{results.clientsSavedOnGoal}</span>
-                  <span className="text-lg md:text-sm uppercase tracking-widest text-white/60 text-center px-6 font-serif italic leading-relaxed">
-                    {t.clientsSaved.replace('{1}', results.tGoal.toString())}
-                  </span>
                 </div>
               </section>
 
